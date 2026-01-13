@@ -1,9 +1,25 @@
 #!/usr/bin/env python3
-import json, re, sys
+import json
+import re, re, sys
 from pathlib import Path
 from collections import Counter
 
 A1 = re.compile(r"^[A-Z]{1,3}[1-9][0-9]*$")
+
+def cell_col(a1: str) -> str:
+    m = re.match(r"^([A-Z]+)", (a1 or "").upper())
+    return m.group(1) if m else ""
+
+def get_forbidden_cols(lock: dict) -> set:
+    # Prefer explicit lock config if present; otherwise default to Excel column T
+    cols = set()
+    for k in ("formula_columns", "forbidden_columns", "locked_formula_columns"):
+        v = lock.get(k)
+        if isinstance(v, list):
+            cols |= {str(x).upper() for x in v}
+    if not cols:
+        cols = {"T"}
+    return cols
 
 def sha256_json(obj):
     import hashlib
@@ -44,6 +60,10 @@ def main():
             continue
 
         plan_sha = plan.get("template_sha256") or plan.get("template_sha")
+    if not plan_sha:
+        skipped["missing_plan_sha"] += 1
+        continue
+plan_sha = plan.get("template_sha256") or plan.get("template_sha")
         if plan_sha and lock_sha and plan_sha != lock_sha:
             skipped["sha_mismatch"] += 1
             continue
