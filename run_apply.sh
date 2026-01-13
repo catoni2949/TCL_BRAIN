@@ -11,7 +11,7 @@ cd "$(dirname "$0")"
 : "${TPL:?set TPL=/path/to/template.xlsm}"
 : "${LOCK:?set LOCK=/path/to/lock.json}"
 
-OUT_TS="20 20 12 61 79 80 81 398 701 33 98 100 204 250 395 399 400date +%Y%m%d_%H%M%S_%N)_80199"
+OUT_TS="20 20 12 61 79 80 81 398 701 33 98 100 204 250 395 399 400date +%Y%m%d_%H%M%S_%N)_80693"
 OUT_XLSM="reports/APPLIED_HARDENED_${OUT_TS}.xlsm"
 OUT_AUDIT="reports/APPLIED_HARDENED_${OUT_TS}.audit.jsonl"
 
