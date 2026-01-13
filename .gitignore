@@ -6,3 +6,6 @@ state/*.bak*
 *.bak
 *.tmp
 tmp/
+
+# runtime report output
+reports/waiting_report.txt
