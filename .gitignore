@@ -35,3 +35,7 @@ archive/drop_processed/
 # --- batch scratch outputs (never commit) ---
 /reports/BATCH_PLANS_READY.txt
 /reports/_batch_fixed/
+
+# --- generated batch selection outputs ---
+/reports/BATCH_READY.txt
+/reports/_batch_ready/
