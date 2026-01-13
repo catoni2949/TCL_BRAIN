@@ -1,0 +1,15 @@
+{
+  "timestamp": "20260108_200857",
+  "pick_csv": "/Users/tclserver/TCL_BRAIN/reports/C4WLS_quote_ledger_inventory_20260108_175816__PDF___QUOTE_LEDGER_EXTRACT_20260108_180923_1fdbd4b2__ESTIMATOR_AMOUNT_PICK__ESTIMATOR_AMOUNT_PICK__AUTO_20260108_200850.csv",
+  "rows_total": 8,
+  "rows_ok": 7,
+  "rows_bad": 1,
+  "issues": [
+    {
+      "row": 9,
+      "source_path": "/Volumes/TCL_DATA 1TB/TCL Partners Dropbox/TCL Partners Dropbox/TCL_Server/_Estimates/Kite - Sierra Trading Lakewood/Sub Bids/Universal Refer.pdf",
+      "issue": "invalid money format: no"
+    }
+  ],
+  "out_csv": "/Users/tclserver/TCL_BRAIN/reports/C4WLS_quote_ledger_inventory_20260108_175816__PDF___QUOTE_LEDGER_EXTRA__AMOUNTS_FINAL_20260108_200857_19a3a236.csv"
+}

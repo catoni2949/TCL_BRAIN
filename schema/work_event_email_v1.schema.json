@@ -1,0 +1,17 @@
+{
+  "name": "work_event_email_v1",
+  "description": "Canonical WorkEvent feed derived from email_index.db using dedup + noise filters. JSONL, one object per line.",
+  "required_fields": {
+    "ts": "string (ISO-8601 UTC timestamp, e.g. 2025-12-04T08:01:22Z)",
+    "sender": "string (email address)",
+    "subject": "string",
+    "project": "string (may be empty)",
+    "waiting_status": "string|null (e.g. neutral, waiting_on_us, etc.)"
+  },
+  "notes": [
+    "This is an append-friendly event log format.",
+    "No embeddings stored here.",
+    "Dedup key is ts+sender+subject+project+text in the source DB.",
+    "Noise filtering is applied prior to export."
+  ]
+}

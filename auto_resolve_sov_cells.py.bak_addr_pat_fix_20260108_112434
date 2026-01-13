@@ -1,0 +1,632 @@
+# --- AUTO HEADER RESOLVER HELPERS ---
+#!/usr/bin/env python3
+import argparse, json, re, time
+import datetime
+from pathlib import Path
+
+try:
+    from pdfminer.high_level import extract_text
+except Exception:
+    extract_text = None
+
+# --- AUTO HEADER RESOLVER HELPERS ---
+import subprocess
+from openpyxl.utils.cell import coordinate_from_string, column_index_from_string
+from openpyxl.worksheet.worksheet import Worksheet
+
+def _norm(s):
+    return re.sub(r"\s+"," ", ("" if s is None else str(s))).strip()
+
+def find_cell_containing(ws: Worksheet, needle: str, max_rows=80, max_cols=40):
+    needle_n = _norm(needle).upper()
+    for r in range(1, max_rows+1):
+        for c in range(1, max_cols+1):
+            v = _norm(ws.cell(r,c).value)
+            if v and v.upper() == needle_n:
+                return (r,c)
+    return None
+
+def write_to_right_of_label(ws: Worksheet, label: str, value_cell_offset=1):
+    pos = find_cell_containing(ws, label, max_rows=80, max_cols=60)
+    if not pos:
+        return None
+    r,c = pos
+    # write into the "value cell" immediately to the right (often merged; we will redirect later)
+    return (r, c + value_cell_offset)
+
+def pdftotext_first_page(path):
+    try:
+        out = subprocess.check_output(["pdftotext","-f","1","-l","1",str(path),"-"], stderr=subprocess.DEVNULL)
+        return out.decode("utf-8", errors="ignore")
+    except Exception:
+        return ""
+
+_ADDR_RE = re.compile(
+    r"(\d{2,6}\s+[A-Za-z0-9][A-Za-z0-9\s\.\-#]{3,}\s+(?:St|Street|Ave|Avenue|Rd|Road|Blvd|Boulevard|Dr|Drive|Ln|Lane|Way|Ct|Court|Pl|Place)\.?\s*,?\s*"
+    r"(?:[A-Za-z\s]+,\s*)?[A-Z]{2}\s*\d{5}(?:-\d{4})?)",
+    re.IGNORECASE
+)
+
+def infer_address_from_plan_sources(plan: dict):
+    # Pull from any PDF sources already in the plan
+    pdfs = []
+    for w in plan.get("writes", []):
+        src = (w.get("source") or {})
+        sp = src.get("source_path") or src.get("path")
+        if sp and str(sp).lower().endswith(".pdf"):
+            pdfs.append(sp)
+    # de-dupe preserving order
+    seen=set()
+    uniq=[]
+    for x in pdfs:
+        if x in seen: 
+            continue
+        seen.add(x)
+        uniq.append(x)
+
+    for sp in uniq[:30]:
+        txt = pdftotext_first_page(Path(sp))
+        if not txt.strip():
+            continue
+        m = _ADDR_RE.search(txt)
+        if m:
+            return _norm(m.group(1))
+    return None
+
+def safe_out_path(out_dir: Path, stem: str, suffix: str):
+    # cap filename and add short hash to avoid Errno 63
+    base = stem[:60]
+    h = hex(abs(hash(stem)))[2:10]
+    ts = time.strftime("%Y%m%d_%H%M%S")
+    return out_dir / f"{base}__{suffix}_{ts}_{h}.json"
+from typing import Any, Dict, List, Optional, Tuple
+
+from openpyxl import load_workbook
+
+
+def norm(x: Any) -> str:
+    if x is None:
+        return ""
+    return str(x).strip()
+
+
+def up(x: Any) -> str:
+    return norm(x).upper()
+
+
+def is_cell_addr(s: str) -> bool:
+    return bool(re.fullmatch(r"[A-Z]{1,3}[1-9]\d{0,5}", s or ""))
+
+
+def col_letter(n: int) -> str:
+    # 1-indexed
+    out = ""
+    while n:
+        n, r = divmod(n - 1, 26)
+        out = chr(65 + r) + out
+    return out
+
+
+def find_cell_containing(ws, needle: str, max_rows: int = 250, max_cols: int = 40) -> Optional[Tuple[int,int]]:
+    N = needle.strip().upper()
+    for r in range(1, min(max_rows, ws.max_row) + 1):
+        for c in range(1, min(max_cols, ws.max_column) + 1):
+            v = ws.cell(r, c).value
+            if v is None:
+                continue
+            if up(v) == N:
+                return (r, c)
+    # fallback: contains
+    for r in range(1, min(max_rows, ws.max_row) + 1):
+        for c in range(1, min(max_cols, ws.max_column) + 1):
+            v = ws.cell(r, c).value
+            if v is None:
+                continue
+            if N in up(v):
+                return (r, c)
+    return None
+
+
+def find_header_row(ws, header_text: str, max_rows: int = 250, max_cols: int = 40) -> Optional[Tuple[int,int]]:
+    return find_cell_containing(ws, header_text, max_rows=max_rows, max_cols=max_cols)
+
+
+def cell_right_of(ws, r: int, c: int) -> Tuple[int,int]:
+    return (r, c + 1)
+
+
+def safe_default_source(plan: Dict[str,Any]) -> Dict[str,Any]:
+    # pick first existing source; otherwise create a stub
+    for w in plan.get("writes", []):
+        if isinstance(w, dict) and isinstance(w.get("source"), dict):
+            s = w["source"]
+            if s.get("source_type") and s.get("source_path") and s.get("locator"):
+                return s
+    return {"source_type": "system", "source_path": "auto_resolver", "locator": "n/a", "notes": ""}
+
+
+def safe_default_meta(plan: Dict[str,Any]) -> Dict[str,Any]:
+    # take first meta if present
+    for w in plan.get("writes", []):
+        m = w.get("meta")
+        if isinstance(m, dict) and m.get("project"):
+            return m
+    return {"project": "UNKNOWN", "option": "UNKNOWN", "trade": "UNKNOWN", "bucket_code": "SYSTEM", "line_id": "AUTO"}
+
+
+def add_write(plan: Dict[str,Any], cell: str, value: Any, sheet: str, source: Dict[str,Any], meta: Dict[str,Any]):
+    plan.setdefault("writes", []).append({
+        "sheet": sheet,
+        "cell": cell,
+        "write": {"value": value},
+        "source": source,
+        "meta": meta
+    })
+
+
+
+
+# Never allow TCL office / internal addresses to be used as PROJECT LOCATION
+# TODO: replace tokens below with your actual office address keywords (street/city/zip/company)
+_DENY_ADDR_PATTERNS = [
+    '\\bTCL\\s+Partners\\b',
+    '\\bWestlake\\b',
+    '\\b44145\\b',
+]
+_DENY_ADDR = re.compile("|".join(_DENY_ADDR_PATTERNS), re.IGNORECASE)
+
+_ADDR_PAT = re.compile(
+    r'('
+    r'\b\d{2,6}\s+[A-Za-z0-9][A-Za-z0-9\s\.\-]*\b'
+    r'(?:St|Street|Ave|Avenue|Blvd|Boulevard|Rd|Road|Dr|Drive|Ln|Lane|Way|Ct|Court|Cir|Circle|Pkwy|Parkway)\b'
+    r'(?:[,\s]+(?:Suite|Ste|Unit|#)\s*[A-Za-z0-9\-]+)?'
+    r'(?:[,\s]+[A-Za-z\s\.\-]{2,40})?'
+    r'(?:[,\s]+[A-Z]{2}\s*\d{5}(?:-\d{4})?)?'
+    r')',
+    re.IGNORECASE
+)
+def _pick_best_address(s: str):
+    if not s or not isinstance(s, str):
+        return None
+    s2 = " ".join(s.replace("\r"," ").replace("\n"," ").split())
+    m = _ADDR_PAT.search(s2)
+    if m:
+        cand = (m.group(1) if hasattr(m, 'group') else str(m)).strip() if m else None
+        if cand and _DENY_ADDR.search(cand):
+            return None
+        return m.group(1).strip()
+    # fallback: if it contains a street suffix, keep a short chunk
+    if re.search(r'\b(Street|St|Avenue|Ave|Blvd|Boulevard|Road|Rd|Drive|Dr|Lane|Ln)\b', s2, re.I):
+        return s2[:80].strip()
+    return None
+
+def _sniff_location_from_project_pdfs(plan: dict):
+    # Use any PDF source in plan to infer project root, then search likely drawings/spec PDFs (not Sub Bids)
+    try:
+        writes = plan.get("writes", [])
+    except Exception:
+        return None
+
+    pdfs = []
+    for w in writes:
+        sp = (w.get("source") or {}).get("source_path") or (w.get("source") or {}).get("path")
+        if isinstance(sp, str) and sp.lower().endswith(".pdf"):
+            pdfs.append(sp)
+    if not pdfs:
+        return None
+
+    base = Path(pdfs[0]).parent
+    # walk up out of "Sub Bids"
+    for _ in range(6):
+        if "sub bids" in str(base).lower():
+            base = base.parent
+        else:
+            break
+
+    kw = re.compile(r'(drawing|drawings|plan|plans|title|cover|spec|specs|manual|bid set|permit)', re.I)
+    candidates = []
+    for fp in base.rglob("*.pdf"):
+        s = str(fp).lower()
+        if "sub bids" in s:
+            continue
+        if kw.search(fp.name) or kw.search(str(fp.parent)):
+            candidates.append(fp)
+
+    # try a few candidates
+    for fp in candidates[:8]:
+        try:
+            if extract_text is None:
+                continue
+            txt = extract_text(str(fp), maxpages=2) or ""
+        except Exception:
+            continue
+        addr = _pick_best_address(txt)
+        if addr:
+            return addr
+    return None
+
+def resolve_header_blocks(ws, plan, source, meta, args):
+    # --- FILL HEADER WRITES (no more None) ---
+    # rules:
+    #   - ESTIMATOR ALWAYS "RNC"
+    #   - LOCATION: sniff from project drawings/spec PDFs if missing; then sanitize to address-like text
+
+    # Build header vals from args/plan
+    vals = {
+    "PROJECT": ((next(((w.get("meta") or {}).get("project") for w in plan.get("writes", []) if isinstance(w, dict) and isinstance(w.get("meta"), dict) and (w.get("meta") or {}).get("project")), None)) or plan.get("project_name") or plan.get("project") or (plan.get("meta") or {}).get("project") or "TBD"),
+    "JOB NO.": (plan.get("job_no") or plan.get("job_number") or (lambda s: (s.split("-")[0].strip() if isinstance(s,str) and "-" in s else (s.split()[0].strip() if isinstance(s,str) and s.strip() else None)))( (next(((w.get("meta") or {}).get("project") for w in plan.get("writes", []) if isinstance(w, dict) and isinstance(w.get("meta"), dict) and (w.get("meta") or {}).get("project")), None)) ) or "TBD"),
+        "LOCATION": (plan.get("location") or ""),
+        "DATE": datetime.date.today().strftime("%m/%d/%Y"),
+        "ESTIMATOR": "RNC",
+        "TOTAL SF": (plan.get("total_sf") if plan.get("total_sf") is not None else None),
+        "COST/SF": (plan.get("cost_sf") if plan.get("cost_sf") is not None else None),
+    }
+
+    # If args provides values, prefer them
+    try:
+        if getattr(args, "project", None): vals["PROJECT"] = args.project
+        if getattr(args, "job_no", None): vals["JOB NO."] = args.job_no
+        if getattr(args, "location", None): vals["LOCATION"] = args.location
+        if getattr(args, "date", None): vals["DATE"] = args.date
+    except Exception:
+        pass
+
+    # LOCATION sniff + sanitize
+    if not (isinstance(vals["LOCATION"], str) and vals["LOCATION"].strip()):
+        sniffed = _sniff_location_from_project_pdfs(plan)
+        if sniffed: vals["LOCATION"] = sniffed
+    vals["LOCATION"] = _pick_best_address(vals["LOCATION"]) or vals["LOCATION"] or None
+
+    print("HEADER_VALS_FINAL:", {k: vals.get(k) for k in ["PROJECT","JOB NO.","LOCATION","DATE","ESTIMATOR","TOTAL SF","COST/SF"]})
+
+    # Write into the plan's HEADER writes (cells are fixed in your template)
+    cell_for = {
+        "PROJECT": "O2",
+        "JOB NO.": "O3",
+        "LOCATION": "O4",
+        "DATE": "T2",
+        "ESTIMATOR": "T3",
+        "TOTAL SF": "H4",
+        "COST/SF": "H6",
+    }
+
+    for w in plan.get("writes", []):
+        meta2 = w.get("meta") or {}
+        if meta2.get("trade") != "HEADER":
+            continue
+        line_id = meta2.get("line_id") or ""
+        if not line_id.startswith("HEADER:"):
+            continue
+        key = line_id.split("HEADER:",1)[1].strip()
+        if key == "COST_SF": key = "COST/SF"
+        if key == "TOTAL_SF": key = "TOTAL SF"
+        if key not in vals:
+            continue
+        v = vals.get(key)
+        # ensure cell is correct too (avoid old redirect junk)
+        w["cell"] = cell_for.get(key, w.get("cell"))
+        if isinstance(w.get("write"), dict):
+            w["write"]["value"] = v
+        else:
+            w["value"] = v
+
+    # These are LABEL cells; we write into the cell to the right.
+    fields = [
+        ("PROJECT", args.project),
+        ("JOB NO.", args.job_no),
+        ("LOCATION", args.location),
+        ("DATE", args.date),
+        ("ESTIMATOR", args.estimator),
+        ("RNC", args.rnc),
+    ]
+    for label, val in fields:
+        if val is None:
+            continue
+        hit = find_cell_containing(ws, label, max_rows=80, max_cols=60)
+        if not hit:
+            continue
+        r,c = hit
+        rr,cc = cell_right_of(ws, r, c)
+        cell = f"{col_letter(cc)}{rr}"
+        add_write(plan, cell, val, "ESTIMATE (INPUT)", source, meta)
+
+
+def resolve_sf_blocks(ws, plan, source, meta, args):
+    # "Total SF =" is a label with target cell to the right (or one cell over depending on spacing)
+    if args.total_sf is not None:
+        hit = find_cell_containing(ws, "Total SF", max_rows=80, max_cols=40)
+        if hit:
+            r,c = hit
+            rr,cc = cell_right_of(ws, r, c)
+            add_write(plan, f"{col_letter(cc)}{rr}", args.total_sf, "ESTIMATE (INPUT)", source, meta)
+
+    if args.cost_sf is not None:
+        hit = find_cell_containing(ws, "Cost/SF", max_rows=80, max_cols=40)
+        if hit:
+            r,c = hit
+            rr,cc = cell_right_of(ws, r, c)
+            add_write(plan, f"{col_letter(cc)}{rr}", args.cost_sf, "ESTIMATE (INPUT)", source, meta)
+
+
+def locate_table_headers(ws) -> Dict[str,int]:
+    # find row where CODE/DESCRIPTION/... exist
+    hdr = find_header_row(ws, "CODE", max_rows=200, max_cols=25)
+    if not hdr:
+        raise SystemExit("FATAL: could not find CODE header in first 200 rows")
+    hdr_row, code_col = hdr
+
+    # find SUBS header on same row
+    subs_col = None
+    desc_col = None
+    for c in range(1, 30):
+        v = ws.cell(hdr_row, c).value
+        if up(v) == "SUBS":
+            subs_col = c
+        if up(v) == "DESCRIPTION":
+            desc_col = c
+    if subs_col is None:
+        raise SystemExit("FATAL: could not find SUBS header on CODE header row")
+    if desc_col is None:
+        raise SystemExit("FATAL: could not find DESCRIPTION header on CODE header row")
+
+    return {"hdr_row": hdr_row, "code_col": code_col, "subs_col": subs_col, "desc_col": desc_col}
+
+
+def iter_rows(ws, start_row: int, code_col: int, desc_col: int, max_rows: int = 1000):
+    for r in range(start_row, min(ws.max_row, start_row + max_rows) + 1):
+        code = norm(ws.cell(r, code_col).value)
+        desc = norm(ws.cell(r, desc_col).value)
+        yield r, code, desc
+
+
+def choose_row_for_trade(ws, hdr_row: int, code_col: int, desc_col: int, subs_col: int,
+                         trade: str) -> Optional[int]:
+    T = trade.strip().upper()
+
+    # routing + keyword sets
+    keyword_map = {
+        "CONCRETE": ["CONCRETE", "SLAB", "FOOTINGS", "FOUNDATION"],
+        "MILLWORK": ["MILLWORK", "CASEWORK", "FINISH CARPENTRY", "WOOD FEATURE", "CABINET"],
+        "PAINT": ["PAINT", "PAINTING"],
+        "PAVING": ["ASPHALT", "PAVING", "STRIPING", "SITEWORK", "SITE WORK", "LANDSCAP", "EARTHWORK"],
+        "ASPHALT": ["ASPHALT", "PAVING", "STRIPING", "SITEWORK", "SITE WORK", "LANDSCAP", "EARTHWORK"],
+    }
+    code_hints = {
+        "CONCRETE": {"3000","3010","3300","3550","3710"},
+        "MILLWORK": {"6100","6200","6300","6400"},
+        "PAINT": {"9900","9950"},
+        # No true paving section in this template — route to sitework if possible
+        "PAVING": {"2000","2010","2020","2200"},
+        "ASPHALT": {"2000","2010","2020","2200"},
+    }
+
+    kws = keyword_map.get(T, [T])
+    hints = code_hints.get(T, set())
+
+    candidates: List[Tuple[int,int,str]] = []  # (score,row,why)
+    for r, code, desc in iter_rows(ws, hdr_row+1, code_col, desc_col, max_rows=1200):
+        if not code and not desc:
+            continue
+        Udesc = desc.upper()
+        Ucode = code.upper()
+
+        # skip group header-ish rows with no subs target (still allow if matches strongly)
+        score = 0
+        why = []
+
+        # code hint
+        if hints and Ucode in hints:
+            score += 50
+            why.append("code_hint")
+
+        # keyword hits
+        hit_count = sum(1 for k in kws if k in Udesc)
+        if hit_count:
+            score += 20 * hit_count
+            why.append(f"kw:{hit_count}")
+
+        # prefer rows that look like line items (quantity/unit exist?) — we don't have those cols here, so just prefer non-empty desc
+        if desc:
+            score += 5
+
+        # de-prioritize pure section headers: desc == trade and code endswith 000 maybe
+        if Udesc == T and re.fullmatch(r"\d{4}", Ucode) and Ucode.endswith("00"):
+            score -= 5
+
+        if score > 0:
+            candidates.append((score, r, ";".join(why)))
+
+    if not candidates:
+        return None
+
+    candidates.sort(key=lambda x: (-x[0], x[1]))
+
+    # Special case: PAVING/ASPHALT — if no asphalt/paving keyword present, route to best SITEWORK-ish
+    if T in ("PAVING","ASPHALT"):
+        # prefer candidates that actually include ASPHALT/PAVING
+        for score,r,why in candidates[:50]:
+            d = ws.cell(r, desc_col).value
+            if d and any(k in str(d).upper() for k in ["ASPHALT","PAVING"]):
+                return r
+        # otherwise route to SITEWORK/DEMOLITION & SITEWORK/earthwork-ish
+        for score,r,why in candidates[:80]:
+            d = ws.cell(r, desc_col).value
+            if d and any(k in str(d).upper() for k in ["SITEWORK","SITE WORK","EARTHWORK","LANDSCAP","DEMOLITION"]):
+                return r
+        return candidates[0][1]
+
+    return candidates[0][1]
+
+
+def resolve_trade_cells(ws, plan, args):
+    hdrs = locate_table_headers(ws)
+    hdr_row, code_col, subs_col, desc_col = hdrs["hdr_row"], hdrs["code_col"], hdrs["subs_col"], hdrs["desc_col"]
+
+    # For each write in plan, if it is a trade write missing a real cell, resolve it.
+    patched = 0
+    for w in plan.get("writes", []):
+        if not isinstance(w, dict):
+            continue
+
+        # try to infer trade + value
+        trade = ""
+        if isinstance(w.get("match"), dict):
+            trade = norm(w["match"].get("trade"))
+        if not trade and isinstance(w.get("meta"), dict):
+            trade = norm(w["meta"].get("trade"))
+
+        # identify "trade amount" writes (your builder uses write.column=AMOUNT)
+        wd = w.get("write") if isinstance(w.get("write"), dict) else {}
+        val = wd.get("value", None)
+        col = wd.get("column", "")
+
+        # if already has a valid cell, skip
+        if is_cell_addr(norm(w.get("cell"))) or is_cell_addr(norm(wd.get("cell"))):
+            continue
+
+        # only resolve for amount-ish writes
+        if val is None:
+            continue
+        if col and str(col).upper() not in ("AMOUNT","SUBS"):
+            # ignore non-amount writes here
+            continue
+
+        if not trade:
+            continue
+
+        row = choose_row_for_trade(ws, hdr_row, code_col, desc_col, subs_col, trade)
+        if row is None:
+            continue
+
+        cell = f"{col_letter(subs_col)}{row}"
+        # put cell at top-level (this is what your validator has liked most consistently)
+        w["cell"] = cell
+        # ensure the write is value-only
+        w.setdefault("write", {})
+        w["write"]["value"] = val
+        if "column" in w["write"]:
+            del w["write"]["column"]
+        if "cell" in w["write"]:
+            del w["write"]["cell"]
+
+        patched += 1
+
+    return patched
+
+
+
+def resolve_header_block_dynamic(ws, plan, default_source, default_meta, values):
+    # values keys: project, job_no, location, date, estimator, total_sf, cost_sf
+    plan.setdefault("meta", {})
+    # force estimator always RNC
+    values = dict(values or {})
+    values["estimator"] = "RNC"
+
+    # if location missing, try to infer from PDFs
+    if not values.get("location"):
+        addr = infer_address_from_plan_sources(plan)
+        if addr:
+            values["location"] = addr
+
+    # project default from meta project if present
+    if not values.get("project"):
+        mp = ((default_meta or {}).get("project") if isinstance(default_meta, dict) else None)
+        if mp:
+            values["project"] = mp
+
+    # Find write targets by label text on sheet
+    targets = {
+        "project":   ("PROJECT",   1),
+        "job_no":    ("JOB NO.",    1),
+        "location":  ("LOCATION",   1),
+        "date":      ("DATE",       1),
+        "estimator": ("ESTIMATOR",  1),
+    }
+
+    # emit writes (cell is likely merged; later redirect step will move it to allowed cell)
+    NEW=[]
+    for key,(lbl,off) in targets.items():
+        if values.get(key) is None:
+            continue
+        pos = write_to_right_of_label(ws, lbl, value_cell_offset=off)
+        if not pos:
+            continue
+        r,c = pos
+        cell = ws.cell(r,c).coordinate
+        NEW.append({
+            "sheet": ws.title,
+            "cell": cell,
+            "value": values[key],
+            "source": default_source,
+            "meta": default_meta
+        })
+
+    # Total SF / Cost/SF blocks (these labels are usually left of their input cells)
+    if values.get("total_sf") is not None:
+        pos = write_to_right_of_label(ws, "Total SF", value_cell_offset=2) or write_to_right_of_label(ws, "Total SF =", value_cell_offset=2)
+        if pos:
+            r,c=pos
+            NEW.append({"sheet":ws.title,"cell":ws.cell(r,c).coordinate,"value":values["total_sf"],"source":default_source,"meta":default_meta})
+
+    if values.get("cost_sf") is not None:
+        pos = write_to_right_of_label(ws, "Cost/SF", value_cell_offset=2) or write_to_right_of_label(ws, "Cost/SF=", value_cell_offset=2)
+        if pos:
+            r,c=pos
+            NEW.append({"sheet":ws.title,"cell":ws.cell(r,c).coordinate,"value":values["cost_sf"],"source":default_source,"meta":default_meta})
+
+    plan.setdefault("writes", [])
+    plan["writes"].extend(NEW)
+    return len(NEW)
+
+def main():
+    ap = argparse.ArgumentParser()
+    ap.add_argument("--plan", required=True)
+    ap.add_argument("--template", required=True)
+    ap.add_argument("--out-dir", required=True)
+
+    # optional header/sf values
+    ap.add_argument("--project")
+    ap.add_argument("--job-no")
+    ap.add_argument("--location")
+    ap.add_argument("--date")
+    ap.add_argument("--estimator")
+    ap.add_argument("--rnc")
+    ap.add_argument("--total-sf")
+    ap.add_argument("--cost-sf")
+
+    args = ap.parse_args()
+
+    plan_path = Path(args.plan)
+    plan = json.loads(plan_path.read_text(encoding="utf-8"))
+
+    # keep template_sha if present, otherwise leave it (validator compares to lock later)
+    src = safe_default_source(plan)
+    meta = safe_default_meta(plan)
+
+    # Load template for lookup only
+    wb = load_workbook(args.template, data_only=True, keep_vba=True)
+    if "ESTIMATE (INPUT)" not in wb.sheetnames:
+        raise SystemExit("FATAL: template missing sheet 'ESTIMATE (INPUT)'")
+    ws = wb["ESTIMATE (INPUT)"]
+
+    resolve_header_blocks(ws, plan, src, meta, args)
+    resolve_sf_blocks(ws, plan, src, meta, args)
+
+    patched = resolve_trade_cells(ws, plan, args)
+
+    ts = time.strftime("%Y%m%d_%H%M%S")
+    # ---- SAFE OUTPUT NAME ----
+    base = plan_path.stem
+    safe_base = base[:60]
+    short_hash = hex(abs(hash(base)))[2:10]
+    out = Path(args.out_dir) / f"{safe_base}__AUTO__CELLS_FIXED_{ts}_{short_hash}.json"
+
+    out.write_text(json.dumps(plan, indent=2), encoding="utf-8")
+
+    print("OK")
+    print("PATCHED_TRADE_CELLS:", patched)
+    print("OUT_PLAN:", str(out))
+
+
+if __name__ == "__main__":
+    main()

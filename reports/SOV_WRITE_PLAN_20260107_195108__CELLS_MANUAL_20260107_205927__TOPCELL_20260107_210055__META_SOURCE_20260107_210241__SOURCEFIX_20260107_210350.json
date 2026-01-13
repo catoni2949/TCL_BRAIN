@@ -1,0 +1,55 @@
+{
+  "template": "/Volumes/TCL_DATA 1TB/TCL Partners Dropbox/Ryan Caton/TCL/TCL_SOV_TEMPLATE GBT.xlsm",
+  "lock": "/Users/tclserver/TCL_BRAIN/schema/TCL_SOV_TEMPLATE_GBT.lock.v1.json",
+  "writes": [
+    {
+      "sheet": "ESTIMATE (INPUT)",
+      "match": {
+        "trade": "Concrete"
+      },
+      "write": {
+        "column": "AMOUNT",
+        "value": 3295.0
+      },
+      "meta": {
+        "project": "C4WLS - St. Francis",
+        "option": "BOTH",
+        "trade": "Concrete",
+        "bucket_code": "QUOTE",
+        "line_id": "Concrete:ARH Inc"
+      },
+      "cell": "I70",
+      "source": {
+        "source_type": "pdf",
+        "source_path": "/Volumes/TCL_DATA 1TB/TCL Partners Dropbox/TCL Partners Dropbox/TCL_Server/_Estimates/C4WLS  St. Francis/Sub Bids/UR.pdf",
+        "locator": "pages:1-2",
+        "vendor": "ARH Inc"
+      }
+    },
+    {
+      "sheet": "ESTIMATE (INPUT)",
+      "match": {
+        "trade": "Millwork"
+      },
+      "write": {
+        "column": "AMOUNT",
+        "value": 52443.0
+      },
+      "meta": {
+        "project": "C4WLS - St. Francis",
+        "option": "BOTH",
+        "trade": "Millwork",
+        "bucket_code": "QUOTE",
+        "line_id": "Millwork:W.W. Wells"
+      },
+      "cell": "I91",
+      "source": {
+        "source_type": "pdf",
+        "source_path": "/Volumes/TCL_DATA 1TB/TCL Partners Dropbox/TCL Partners Dropbox/TCL_Server/_Estimates/C4WLS  St. Francis/Sub Bids/WW Wells.pdf",
+        "locator": "pages:1-2",
+        "vendor": "W.W. Wells"
+      }
+    }
+  ],
+  "template_sha256": "6f74e739c44964276e2103994a7a8983fd3c5f948f087a769f17e9139c052363"
+}

@@ -1,0 +1,23 @@
+{
+  "rom_writes": [
+    {
+      "code": 9100,
+      "row": 131
+    }
+  ],
+  "override_writes": [
+    {
+      "code": 1000,
+      "row": 20
+    },
+    {
+      "code": 15500,
+      "row": 202
+    },
+    {
+      "code": 16000,
+      "row": 210
+    }
+  ],
+  "skipped_self_perf_subs": []
+}

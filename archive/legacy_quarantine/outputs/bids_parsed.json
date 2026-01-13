@@ -1,0 +1,61 @@
+{
+  "bids": [
+    {
+      "file": "Atlas Mechanical.pdf",
+      "trade": "MECHANICAL",
+      "bidder_name": "Atlas Mechanical",
+      "project_name_raw": null,
+      "project_address_raw": null,
+      "base_total": null,
+      "total_parse_notes": [
+        "unparsed"
+      ],
+      "allowances": [],
+      "alternates": [],
+      "exclusions": [],
+      "clarifications": [],
+      "schedule_notes": [],
+      "confidence_score": 0.0,
+      "warnings": [],
+      "parsed_at": "2025-12-16T15:53:45.704761Z"
+    },
+    {
+      "file": "Horizon Electric.pdf",
+      "trade": "ELECTRICAL",
+      "bidder_name": "Horizon Electric",
+      "project_name_raw": null,
+      "project_address_raw": null,
+      "base_total": null,
+      "total_parse_notes": [
+        "unparsed"
+      ],
+      "allowances": [],
+      "alternates": [],
+      "exclusions": [],
+      "clarifications": [],
+      "schedule_notes": [],
+      "confidence_score": 0.0,
+      "warnings": [],
+      "parsed_at": "2025-12-16T15:53:45.705199Z"
+    },
+    {
+      "file": "Kirby Electric.pdf",
+      "trade": "ELECTRICAL",
+      "bidder_name": "Kirby Electric",
+      "project_name_raw": null,
+      "project_address_raw": null,
+      "base_total": null,
+      "total_parse_notes": [
+        "unparsed"
+      ],
+      "allowances": [],
+      "alternates": [],
+      "exclusions": [],
+      "clarifications": [],
+      "schedule_notes": [],
+      "confidence_score": 0.0,
+      "warnings": [],
+      "parsed_at": "2025-12-16T15:53:45.705244Z"
+    }
+  ]
+}

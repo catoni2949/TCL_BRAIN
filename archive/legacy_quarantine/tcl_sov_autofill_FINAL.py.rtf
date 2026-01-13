@@ -1,0 +1,208 @@
+{\rtf1\ansi\ansicpg1252\cocoartf2822
+\cocoatextscaling0\cocoaplatform0{\fonttbl\f0\fswiss\fcharset0 Helvetica;}
+{\colortbl;\red255\green255\blue255;}
+{\*\expandedcolortbl;;}
+\margl1440\margr1440\vieww11520\viewh9760\viewkind0
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural\partightenfactor0
+
+\f0\fs24 \cf0 cd ~/tcl_sov_run\
+source .venv/bin/activate\
+\
+cat <<'PY' > tcl_sov_autofill_FINAL.py\
+#!/usr/bin/env python3\
+import argparse\
+from pathlib import Path\
+from datetime import date\
+from openpyxl import load_workbook\
+from openpyxl.cell.cell import MergedCell\
+from openpyxl.utils.cell import coordinate_from_string, column_index_from_string, get_column_letter\
+\
+SHEET_INPUT = "ESTIMATE (INPUT)"\
+\
+# Approved header entry cells (top-left of the entry boxes)\
+CELL_PROJECT   = "O3"\
+CELL_ADDR1     = "O4"\
+CELL_CITYSTZIP = "O5"\
+CELL_DATE      = "T3"\
+CELL_ESTIMATOR = "T5"\
+\
+def merged_topleft_addr(ws, addr: str) -> str:\
+    """If addr points into a merged range, return that merge's top-left cell."""\
+    cell = ws[addr]\
+    if not isinstance(cell, MergedCell):\
+        return addr\
+    col_letter, row = coordinate_from_string(addr)\
+    col = column_index_from_string(col_letter)\
+    for r in ws.merged_cells.ranges:\
+        if r.min_row <= row <= r.max_row and r.min_col <= col <= r.max_col:\
+            return f"\{get_column_letter(r.min_col)\}\{r.min_row\}"\
+    return addr\
+\
+def is_colored(cell) -> bool:\
+    f = cell.fill\
+    if f is None:\
+        return False\
+    if getattr(f, "patternType", None) not in (None, "none"):\
+        return True\
+    fg = getattr(f, "fgColor", None)\
+    rgb = getattr(fg, "rgb", None) if fg else None\
+    if rgb and rgb not in ("00000000", "FFFFFFFF"):\
+        return True\
+    return False\
+\
+def is_formula(cell) -> bool:\
+    return isinstance(cell.value, str) and cell.value.startswith("=")\
+\
+def norm_u(v) -> str:\
+    return "" if v is None else str(v).strip().upper()\
+\
+def to_float(v):\
+    if v is None:\
+        return None\
+    s = str(v).strip().replace(",", "").replace("$", "")\
+    if s == "":\
+        return None\
+    return float(s)\
+\
+def find_header_row(ws, max_scan=200):\
+    max_c = ws.max_column\
+    for r in range(1, min(max_scan, ws.max_row) + 1):\
+        row = [norm_u(ws.cell(r, c).value) for c in range(1, max_c + 1)]\
+        if "CODE" in row and "DESCRIPTION" in row:\
+            # need at least one SUBS header too (there are two)\
+            if "SUBS" in row:\
+                return r\
+    raise RuntimeError("Could not find header row (need CODE + DESCRIPTION + SUBS).")\
+\
+def find_col_exact(ws, header_row, name):\
+    name = name.upper()\
+    for c in range(1, ws.max_column + 1):\
+        if norm_u(ws.cell(header_row, c).value) == name:\
+            return c\
+    raise RuntimeError(f"Missing header '\{name\}' on header row \{header_row\}")\
+\
+def find_first_subs_col(ws, header_row):\
+    # First "SUBS" is the UNIT PRICES one. Second is in PRICE EXTENSIONS.\
+    for c in range(1, ws.max_column + 1):\
+        if norm_u(ws.cell(header_row, c).value) == "SUBS":\
+            return c\
+    raise RuntimeError("Could not find a SUBS column.")\
+\
+def find_total_sf_value_cell(ws):\
+    # finds cell immediately right of the "Total SF" label near the top\
+    for r in range(1, 50):\
+        for c in range(1, 30):\
+            if norm_u(ws.cell(r, c).value).replace("=", "") == "TOTAL SF":\
+                return (r, c + 1)\
+    return None\
+\
+def find_row_by_code_and_desc_contains(ws, header_row, code_col, desc_col, code_int, must_contain_list):\
+    must_contain_list = [x.upper() for x in must_contain_list]\
+    for r in range(header_row + 1, ws.max_row + 1):\
+        code = ws.cell(r, code_col).value\
+        desc = norm_u(ws.cell(r, desc_col).value)\
+        if code is None:\
+            continue\
+        try:\
+            ci = int(float(code))\
+        except Exception:\
+            continue\
+        if ci != int(code_int):\
+            continue\
+        if any(x not in desc for x in must_contain_list):\
+            continue\
+        # never touch colored rows\
+        if is_colored(ws.cell(r, code_col)) or is_colored(ws.cell(r, desc_col)):\
+            continue\
+        return r\
+    return None\
+\
+def safe_set(ws, addr, value):\
+    addr2 = merged_topleft_addr(ws, addr)\
+    cell = ws[addr2]\
+    # allow header writes even if styled; but still avoid formula\
+    if is_formula(cell):\
+        return\
+    cell.value = value\
+\
+def safe_write_subs(ws, row, subs_col, amount):\
+    cell = ws.cell(row, subs_col)\
+    if isinstance(cell, MergedCell):\
+        raise RuntimeError(f"Row \{row\}: SUBS cell is merged (can't write).")\
+    if is_colored(cell) or is_formula(cell):\
+        raise RuntimeError(f"Row \{row\}: SUBS cell is protected (colored/formula).")\
+    cell.value = float(amount)\
+\
+def main():\
+    ap = argparse.ArgumentParser()\
+    ap.add_argument("--template", required=True)\
+    ap.add_argument("--out", required=True)\
+\
+    # header/meta\
+    ap.add_argument("--project", required=True)\
+    ap.add_argument("--addr1", required=True)\
+    ap.add_argument("--citystzip", required=True)\
+    ap.add_argument("--sf", required=True, help="Total SF (number)")\
+    ap.add_argument("--date", default=None, help="e.g. 12/16/2025 (defaults to today)")\
+    # only two subs\
+    ap.add_argument("--mech", required=True, help="Mechanical $")\
+    ap.add_argument("--elec", required=True, help="Electrical $")\
+\
+    args = ap.parse_args()\
+\
+    wb = load_workbook(args.template, keep_vba=True)\
+    if SHEET_INPUT not in wb.sheetnames:\
+        raise RuntimeError(f"Missing sheet '\{SHEET_INPUT\}'. Found: \{wb.sheetnames\}")\
+\
+    ws = wb[SHEET_INPUT]\
+\
+    # Fill header\
+    safe_set(ws, CELL_PROJECT, args.project)\
+    safe_set(ws, CELL_ADDR1, args.addr1)\
+    safe_set(ws, CELL_CITYSTZIP, args.citystzip)\
+    safe_set(ws, CELL_ESTIMATOR, "RNC")\
+    dt = args.date or date.today().strftime("%-m/%-d/%Y")\
+    safe_set(ws, CELL_DATE, dt)\
+\
+    # Total SF (ONLY the input value cell; Cost/SF stays formula)\
+    sf_cell = find_total_sf_value_cell(ws)\
+    if sf_cell:\
+        r, c = sf_cell\
+        v = float(str(args.sf).replace(",", "").strip())\
+        ws.cell(r, c).value = v\
+\
+    # Table mapping\
+    header_row = find_header_row(ws)\
+    code_col = find_col_exact(ws, header_row, "CODE")\
+    desc_col = find_col_exact(ws, header_row, "DESCRIPTION")\
+    subs_col = find_first_subs_col(ws, header_row)\
+\
+    mech_amt = to_float(args.mech)\
+    elec_amt = to_float(args.elec)\
+\
+    # HARD MAP (approved intent: only these two)\
+    # Mechanical: code 15000 row that contains HVAC\
+    mech_row = find_row_by_code_and_desc_contains(ws, header_row, code_col, desc_col, 15000, ["HVAC"])\
+    if mech_row is None:\
+        raise RuntimeError("Could not find Mechanical target row: CODE 15000 containing 'HVAC'.")\
+    safe_write_subs(ws, mech_row, subs_col, mech_amt)\
+\
+    # Electrical: code 16000 row that contains ELECTRICAL BASE\
+    elec_row = find_row_by_code_and_desc_contains(ws, header_row, code_col, desc_col, 16000, ["ELECTRICAL", "BASE"])\
+    if elec_row is None:\
+        raise RuntimeError("Could not find Electrical target row: CODE 16000 containing 'ELECTRICAL' + 'BASE'.")\
+    safe_write_subs(ws, elec_row, subs_col, elec_amt)\
+\
+    out = Path(args.out)\
+    out.parent.mkdir(parents=True, exist_ok=True)\
+    wb.save(out)\
+\
+    print("SUCCESS")\
+    print(f"MECH  wrote row \{mech_row\} SUBS=\{mech_amt\}")\
+    print(f"ELEC  wrote row \{elec_row\} SUBS=\{elec_amt\}")\
+    print("OUT:", out)\
+\
+if __name__ == "__main__":\
+    main()\
+PY\
+chmod +x tcl_sov_autofill_FINAL.py }

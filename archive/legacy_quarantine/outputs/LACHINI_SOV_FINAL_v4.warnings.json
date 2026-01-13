@@ -1,0 +1,75 @@
+{
+  "generated_at": "2025-12-16T19:02:27.739434Z",
+  "wrote": [],
+  "warnings": [
+    {
+      "warn": "missing_amount",
+      "trade": {
+        "trade": "MECHANICAL",
+        "decision": {
+          "trade": "MECHANICAL",
+          "status": "HOLD_NEED_NUMBER"
+        },
+        "bids": [
+          {
+            "bidder": "Atlas Mechanical",
+            "file": "Atlas Mechanical.pdf",
+            "project_raw": null,
+            "total": null,
+            "confidence": 0.0,
+            "project_match": 0.0,
+            "completeness": 45.0,
+            "exclusions": [],
+            "allowances": [],
+            "alternates": []
+          }
+        ],
+        "clarifications": [
+          "Confirm bid is for the correct project (project name/address not clearly stated on proposal).",
+          "Provide base bid total for Atlas Mechanical (Atlas Mechanical.pdf)."
+        ]
+      }
+    },
+    {
+      "warn": "missing_amount",
+      "trade": {
+        "trade": "ELECTRICAL",
+        "decision": {
+          "trade": "ELECTRICAL",
+          "status": "HOLD_NEED_NUMBER"
+        },
+        "bids": [
+          {
+            "bidder": "Horizon Electric",
+            "file": "Horizon Electric.pdf",
+            "project_raw": null,
+            "total": null,
+            "confidence": 0.0,
+            "project_match": 0.0,
+            "completeness": 45.0,
+            "exclusions": [],
+            "allowances": [],
+            "alternates": []
+          },
+          {
+            "bidder": "Kirby Electric",
+            "file": "Kirby Electric.pdf",
+            "project_raw": null,
+            "total": null,
+            "confidence": 0.0,
+            "project_match": 0.0,
+            "completeness": 45.0,
+            "exclusions": [],
+            "allowances": [],
+            "alternates": []
+          }
+        ],
+        "clarifications": [
+          "Confirm bid is for the correct project (project name/address not clearly stated on proposal).",
+          "Provide base bid total for Horizon Electric (Horizon Electric.pdf).",
+          "Provide base bid total for Kirby Electric (Kirby Electric.pdf)."
+        ]
+      }
+    }
+  ]
+}

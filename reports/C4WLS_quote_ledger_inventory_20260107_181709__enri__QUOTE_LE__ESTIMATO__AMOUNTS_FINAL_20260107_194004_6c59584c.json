@@ -1,0 +1,30 @@
+{
+  "timestamp": "20260107_194004",
+  "pick_csv": "/Users/tclserver/TCL_BRAIN/reports/C4WLS_quote_ledger_inventory_20260107_181709__enri__QUOTE_LE__ESTIMATOR_AMOUNT_PICK.csv",
+  "rows_total": 4,
+  "rows_ok": 0,
+  "rows_bad": 4,
+  "issues": [
+    {
+      "row": 2,
+      "source_path": "/Volumes/TCL_DATA 1TB/TCL Partners Dropbox/TCL Partners Dropbox/TCL_Server/_Estimates/C4WLS  St. Francis/Sub Bids/Olympic.pdf",
+      "issue": "missing estimator_selected_amount_clean"
+    },
+    {
+      "row": 3,
+      "source_path": "/Volumes/TCL_DATA 1TB/TCL Partners Dropbox/TCL Partners Dropbox/TCL_Server/_Estimates/C4WLS  St. Francis/Sub Bids/Pro Paint Solutions.pdf",
+      "issue": "missing estimator_selected_amount_clean"
+    },
+    {
+      "row": 4,
+      "source_path": "/Volumes/TCL_DATA 1TB/TCL Partners Dropbox/TCL Partners Dropbox/TCL_Server/_Estimates/C4WLS  St. Francis/Sub Bids/UR.pdf",
+      "issue": "missing estimator_selected_amount_clean"
+    },
+    {
+      "row": 5,
+      "source_path": "/Volumes/TCL_DATA 1TB/TCL Partners Dropbox/TCL Partners Dropbox/TCL_Server/_Estimates/C4WLS  St. Francis/Sub Bids/WW Wells.pdf",
+      "issue": "missing estimator_selected_amount_clean"
+    }
+  ],
+  "out_csv": "/Users/tclserver/TCL_BRAIN/reports/C4WLS_quote_ledger_inventory_20260107_181709__enri__QUOTE_LE__ESTIMATO__AMOUNTS_FINAL_20260107_194004_6c59584c.csv"
+}

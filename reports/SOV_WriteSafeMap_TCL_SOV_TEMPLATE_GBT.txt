@@ -1,0 +1,66 @@
+SOV WRITE-SAFE MAP (READ-ONLY)
+
+Timestamp: 2026-01-07 18:07:41
+Template: /Volumes/TCL_DATA 1TB/TCL Partners Dropbox/Ryan Caton/TCL/TCL_SOV_TEMPLATE GBT.xlsm
+SHA256: 6f74e739c44964276e2103994a7a8983fd3c5f948f087a769f17e9139c052363
+Governing sheet: ESTIMATE (INPUT)
+CODE header: R11C1 (A)
+Code rows: 174 (R13..R228)
+Scan cols: A:AZ
+
+SAFE columns (41): A, D, E, F, G, H, I, J, L, U, V, W, X, Y, Z, AA, AB, AC, AD, AE, AF, AG, AH, AI, AJ, AK, AL, AM, AN, AO, AP, AQ, AR, AS, AT, AU, AV, AW, AX, AY, AZ
+LOCKED columns (11): B, C, K, M, N, O, P, Q, R, S, T
+
+Column stats (per code-row scan):
+- A: formula=0 merged=0 blank=0 value=174
+- B: formula=0 merged=112 blank=0 value=62
+- C: formula=0 merged=112 blank=62 value=0
+- D: formula=0 merged=0 blank=20 value=154
+- E: formula=0 merged=0 blank=20 value=154
+- F: formula=0 merged=0 blank=174 value=0
+- G: formula=0 merged=0 blank=169 value=5
+- H: formula=0 merged=0 blank=174 value=0
+- I: formula=0 merged=0 blank=174 value=0
+- J: formula=0 merged=0 blank=174 value=0
+- K: formula=1 merged=0 blank=173 value=0
+- L: formula=0 merged=0 blank=174 value=0
+- M: formula=174 merged=0 blank=0 value=0
+- N: formula=174 merged=0 blank=0 value=0
+- O: formula=174 merged=0 blank=0 value=0
+- P: formula=174 merged=0 blank=0 value=0
+- Q: formula=174 merged=0 blank=0 value=0
+- R: formula=174 merged=0 blank=0 value=0
+- S: formula=174 merged=0 blank=0 value=0
+- T: formula=174 merged=0 blank=0 value=0
+- U: formula=0 merged=0 blank=154 value=20
+- V: formula=0 merged=0 blank=154 value=20
+- W: formula=0 merged=0 blank=174 value=0
+- X: formula=0 merged=0 blank=174 value=0
+- Y: formula=0 merged=0 blank=174 value=0
+- Z: formula=0 merged=0 blank=174 value=0
+- AA: formula=0 merged=0 blank=174 value=0
+- AB: formula=0 merged=0 blank=174 value=0
+- AC: formula=0 merged=0 blank=174 value=0
+- AD: formula=0 merged=0 blank=174 value=0
+- AE: formula=0 merged=0 blank=174 value=0
+- AF: formula=0 merged=0 blank=174 value=0
+- AG: formula=0 merged=0 blank=174 value=0
+- AH: formula=0 merged=0 blank=174 value=0
+- AI: formula=0 merged=0 blank=174 value=0
+- AJ: formula=0 merged=0 blank=174 value=0
+- AK: formula=0 merged=0 blank=174 value=0
+- AL: formula=0 merged=0 blank=174 value=0
+- AM: formula=0 merged=0 blank=174 value=0
+- AN: formula=0 merged=0 blank=174 value=0
+- AO: formula=0 merged=0 blank=174 value=0
+- AP: formula=0 merged=0 blank=174 value=0
+- AQ: formula=0 merged=0 blank=174 value=0
+- AR: formula=0 merged=0 blank=174 value=0
+- AS: formula=0 merged=0 blank=174 value=0
+- AT: formula=0 merged=0 blank=174 value=0
+- AU: formula=0 merged=0 blank=174 value=0
+- AV: formula=0 merged=0 blank=174 value=0
+- AW: formula=0 merged=0 blank=174 value=0
+- AX: formula=0 merged=0 blank=174 value=0
+- AY: formula=0 merged=0 blank=174 value=0
+- AZ: formula=0 merged=0 blank=174 value=0

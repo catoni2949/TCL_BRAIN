@@ -1,0 +1,7 @@
+{
+  "created_ts": "2026-01-07 18:18:12",
+  "input_csv": "/Users/tclserver/TCL_BRAIN/reports/C4WLS_quote_ledger_inventory_20260107_181709.csv",
+  "count": 102,
+  "enriched": 19,
+  "missing_files": 0
+}

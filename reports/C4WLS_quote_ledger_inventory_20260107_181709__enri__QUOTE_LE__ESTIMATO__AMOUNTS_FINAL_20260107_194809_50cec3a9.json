@@ -1,0 +1,9 @@
+{
+  "timestamp": "20260107_194809",
+  "pick_csv": "/Users/tclserver/TCL_BRAIN/reports/C4WLS_quote_ledger_inventory_20260107_181709__enri__QUOTE_LE__ESTIMATOR_AMOUNT_PICK__AUTO_FILLED_20260107_194809.csv",
+  "rows_total": 4,
+  "rows_ok": 4,
+  "rows_bad": 0,
+  "issues": [],
+  "out_csv": "/Users/tclserver/TCL_BRAIN/reports/C4WLS_quote_ledger_inventory_20260107_181709__enri__QUOTE_LE__ESTIMATO__AMOUNTS_FINAL_20260107_194809_50cec3a9.csv"
+}

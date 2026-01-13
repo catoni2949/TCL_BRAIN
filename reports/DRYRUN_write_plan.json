@@ -1,0 +1,27 @@
+{
+  "plan_version": "v1",
+  "created_ts": "2026-01-07 18:13:35",
+  "template_lock_path": "/Users/tclserver/TCL_BRAIN/schema/TCL_SOV_TEMPLATE_GBT.lock.v1.json",
+  "template_sha256": "6f74e739c44964276e2103994a7a8983fd3c5f948f087a769f17e9139c052363",
+  "writes": [
+    {
+      "sheet": "ESTIMATE (INPUT)",
+      "cell": "A13",
+      "value": "PLAN_TEST_OK",
+      "source": {
+        "source_type": "allowance",
+        "source_path": "PLAN_TEST",
+        "locator": "unit-test",
+        "notes": "Not a real estimate value"
+      },
+      "meta": {
+        "project": "C4WLS - St. Francis",
+        "option": "2",
+        "trade": "TEST",
+        "bucket_code": "1000",
+        "line_id": "UNITTEST_PLAN_001",
+        "note": "Not a real estimate value"
+      }
+    }
+  ]
+}

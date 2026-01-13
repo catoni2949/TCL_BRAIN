@@ -1,0 +1,382 @@
+trade_section,vendor_company,contact,phone,email
+FINAL CLEAN,Flawless Facilities,Julian Gonzales,,flawlesspnw@gmail.com
+FINAL CLEAN,JR Building Maintenance,Ryan Stephens,206-498-5974,rtrain2882@yahoo.com
+FINAL CLEAN,Northstar Solution,Dmitry Buzhduga,971-420-4538,northstarsolution@yahoo.com
+FINAL CLEAN,Northstar Solution,Sarah,360-241-7588,
+SCAFFOLDING,Phampena Inc,Oscar Daza,206-823-8573,Oscar@phampena.com
+SITE WORK,Aero Construction,Kim M,425-334-0082,kimm@pceaero.com
+SITE WORK,Archer,Troy Pugh,253-872-7222,tpugh@archerconstruction.com
+SITE WORK,DTG Recycle,Alyssa Adolfson,425-549-3000,aadolfson@dtgrecycle.com
+SITE WORK,JMZ Excavation Contractors,Joe Zlab,425-876-7305,joe.zlab@gmail.com
+SITE WORK,Lloyd's Enterprises,Steve Bauman,253-874-6692,steveb@lloydenterprisesinc.com
+SITE WORK,Nelson Construction,Tracy Gregg,360-668-3800,tracy@teamnelsoninc.com
+SITE WORK,Rainier Excavating,Scott Jamison,253-875-3478,"sjamison@rainierexcavating,com"
+SITE WORK,Waeco Construction,Wade Edelbrock,206-423-7074,wade@waecoconstruction.com
+SURVEYING,Benchmark Surveying,Brian Deboer,206-459-7010,brian@benchmarksurveyingllc.com
+SURVEYING,Barghausen,Dave Williams,425-656-7481,dwilliams@barghausen.com
+DEMOLITION,C&J Excavating,Brian Coram,360-683-7741,candjexcavating@yahoo.com
+DEMOLITION,DNR-Dirt Wurx,Derek Brink,253-205-5650,dnrdirtwurx@gmail.com
+DEMOLITION,DTG Recycle,Alyssa Adolfson,425-549-3000,aadolfson@dtgrecycle.com
+DEMOLITION,GR&R Demo,Ryan Ross,425-419-4105,ryan@grrdemo.com
+DEMOLITION,Grayhawk Construction,Jeremy Ice,360-606-7915,JeremyI@grayhawkconst.com
+DEMOLITION,Indepth Excavation,Jeff Miller,425-478-1138,jm@indepthex.com
+DEMOLITION,Solutionz Inc. Demo & Abatement,Chad Shannon,425-238-4408,chads@demolitionsolutionz.com
+DEMOLITION,Tap Demoltion,Wade Witton,253-854-4262,tapllco@aol.com
+DEMOLITION,Wrecking Ball,Jim Bristow,425-402-4122,jimb@wreckingballdemo.com
+DEMOLITION,Wrecking Ball,Joe Newland,425-339-3111,joen@wreckingballdemo.com
+DEMOLITION,Woodland Industries,Dana Schmidt,253-770-9663,dana@woodlandindustries.net
+ASBESTOS,Affordable Abatement,Vicki Boser,425-512-8750,Office@affenv.net
+ASBESTOS,North Star Construction & Environmental,Kurt Schonewald,206-999-1287,kurt@nsconst.com
+ASPHALT & PAVING,Affordable Asphalt,John,360-918-9694,aahub2011@gmail.com
+ASPHALT & PAVING,Flagstone Paving,Adam Ehrlich,253-881-9001,flagstonepaving.llc@gmail.com
+ASPHALT & PAVING,Harms Paving,John Jackson,360-563-1180,harmspaving@gmail.com
+ASPHALT & PAVING,Lakeside Industries,Wyatt Harris,425-743-1289,Wyatt.Harris@lakesideindustries.com
+ASPHALT & PAVING,Northwest Asphalt - North End,Shane Olson,253-631-3611,shane@nwasphalt.com
+ASPHALT & PAVING,Northwest Asphalt - South End,Robert Randall,360-491-5460,Robert.Randall@lakesideindustries.com
+ASPHALT & PAVING,Northshore Paving,Greg,425-481-6598,greg@northshorepaving.net
+ASPHALT & PAVING,Olympic Paving,Jack Shull,425-778-3126,Jack.shull@olympicpaving.net
+STRIPING,Straight Line Striping,Jen,425-316-3000,jen@straightlinestripe.com
+STRIPING,Stripe Rite,Jeff McHugh,253-863-2987,Jeff.McHugh@SPMNW.com
+FENCING,Quality Fence,Matt,253-939-8533,mmccurdy@quality-fence.com
+FENCING,Economy Fence,Brent McBride,425-658-0145,brent@economyfence.com
+FENCING,In Line Security,Donald Muridan,206-456-7662,office@inlinesecurityfence.com
+FENCING,Secoma Fence,Robert DeWitt-Connor McGill,253-926-8600,robert@secomafence.com - Conner@secomafence.com
+FENCING,Town & Country,Dan,425-775-0531,info@townandcountryfence.net
+LANDSCAPE,Earthworks (North Area),Jim Ziegenfuss,206-423-9728,jimz@earthworkslsi.com
+LANDSCAPE,Earthworks (South Area),Daren Wagner,206-261-5202,darenw@earthworkslsi.com
+LANDSCAPE,First ImpreShawn Landscaping,Shawn Gilbert,206-293-7211,firstimpresshawn@yahoo.com
+LANDSCAPE,Greenway Landscape,Thad Fray,206-799-1880,thad@greenwaylandscapes.net
+LANDSCAPE,Greening America,Jerry Cooper,425-508-2696,jerry@greeningamerica.net
+LANDSCAPE,Landcare,Paul Barnard,425-757-4940,Paul.Barnard@landcare.com
+LANDSCAPE,Pacific Earthworks,Aaron Ascher,206-625-1749,aaron@pacificearthworks.com
+LANDSCAPE,Peak Landscaping,Mark Pyrah,503-535-9760,Markp@peaklandscape.com
+LANDSCAPE,Winterbourne Landscape,Jim Winterbourne,425-941-7289,jim@winterbournelandscape.com
+CONCRETE,Apeland,Matt,253-508-4675,matt@aciwa.com
+CONCRETE,All Concrete Services,Scott,425-432-6293,eastsideconcrete@comcast.net
+CONCRETE,ARH Inc,Dave Hartley,206-510-8379,dhartley@arh-inc.com
+CONCRETE,CalPortland,Michael Johnson,206-549-6867,mjohnson3@calportland.com
+CONCRETE,Caliber Concrete,Matt,253-927-0707,matt@caliberconcrete.com
+CONCRETE,Cascade Concrete Sawing- Everett/South of Seattle,Dustin Smith,206-571-9292,Dustin@cascadeconcretesawing.com
+CONCRETE,Cascade Concrete Sawing- Seattle,Zack Longland,206-571-9311,zack@cascadeconcretesawing.com
+CONCRETE,Concrete Construction Services,Bob Wendt,206-498-1815,bobwendt4@gmail.com
+CONCRETE,Crystal Soda Blast ( Refinish Concrete),Bryan Cordes,206-316-2502,bryan@crystalsodablast.com
+CONCRETE,Daves Concrete,Dave Moore,206-799-3184,davesconcrete@outlook.com
+CONCRETE,DKS,Mike King,360-474-1333,mike.dks@frontier.com
+CONCRETE,EM Precision,Gerry Nuss,253-370-6482,gnuss@em-precision.com
+CONCRETE,Highpoint Concrete,Darren Harvey,253-508-0199,kalena4033@comcast.net
+CONCRETE,JRG Concrete,Rick Lea,253-651-2327,rick@jrgconcrete.com
+CONCRETE,Old Castle (Vaults),Deon Lourens,503-537-8550,deon.lourens@oldcastle.com
+CONCRETE,Olympic Concrete,,206-786-2648,
+CONCRETE,Quick & Easy Concrete Delivery,Bob Neal,425-515-0089,bobn@qeconcrete.com
+CONCRETE,Pacific Northest Concrete,David Quincey,206-650-1202,David@PNWconcrete.com
+CONCRETE,Ricci Quick & Easy Concrete,Tyler R,425-771-6443,tylerr@qeconcrete.com
+CONCRETE,Simma Restoration (Refinish Concrete),Arne Klem,425-269-4681,aklem36@gmail.com
+CONCRETE,Steckler Construction,,425-754-1152,
+CONCRETE CUTTING,Cut All Concrete,Gordon,425-398-0900,kim@cutallconcrete.com
+CONCRETE CUTTING,Evergreen Concrete Cutting,Heather Rader,253-826-7644,heather@evergreenconcretecutting.com
+CONCRETE CUTTING,Moore Scanning & Coring,Jake Moore,253-780-7033,jake@moorescanningandcoring.com
+CONCRETE CUTTING,Northwest Concrete Cutting,Vince Conwell,425-864-9225,nwwc1@comcast.net
+CONCRETE CUTTING,Olympic Concrete Cutting,Brad Norman,360-452-5252,olympicconcretecutting@live.com
+CONCRETE CUTTING,Scan 2 Core (Scanning & Coring),Lori Langfang,360-827-0479,Lori Langfang <lori.l@scan2core.com>
+CONCRETE CUTTING,Shoreline Concrete Sawing,John Legault,206-417-0533,shorelineconcrete@msn.com
+CONCRETE CUTTING,Siler's Concrete Cutting,Sharee Paulson,206-901-9383,sharee@silersconcretecutting.com
+SCAFFOLDING,Magnum Construction,Chad,360-863-3406,chad@magnumconstructionservices.com
+MASONRY,Big Rock Masonry (Prev Keystone),Jim Martin,253-405-4774,JimMartin@bigrockmasonry.com
+MASONRY,Cascade Construction,Ryan,253-531-7835,bids@cascadeconst.com
+MASONRY,Cutting Edge (Small-Med Jobs),Aron Norton,206-353-3669,cuttingedgebrickstonemasonry@gmail.com
+MASONRY,Fairweather Masonry,Kenny Fairweather,206-595-2589,kenny@fairweathermasonry.com
+MASONRY,Henson Company,John Sharp,206-632-5720,john@thehensoncompany.com
+MASONRY,Johnston Construction,Jed,253-473-3997,jed@johnstonconstruction.com
+MASONRY,Keystone Masonry,Michelle Wood,360-701-3541,MichelleW@keystonemasonryinc.com
+MASONRY,R&D Masonry,John Newman,360-653-1414,Johnn@rdmasonry.com
+MASONRY,Ward Masonry,Jim Ward,425-742-9069,jim@wardsmasonry.com
+WOOD FRAMING/TRUSSES,Chinook Lumber,Todd Webster,360-294-8396,ToddW@chinooklumber.com
+WOOD FRAMING/TRUSSES,Matheus Lumber,Mike Warner,425-489-3000,mike@matheuslumber.com
+WOOD FRAMING/TRUSSES,Pro Build,Nathanial Goldsby,360-925-4155,nathanial.goldsby@probuild.com
+WOOD FRAMING/TRUSSES,Torco Construction LLC,Frank Torres,206-949-0743,frank@torco.construction
+STEEL/TRUSSES,Full Tilt Construction,Tyler Powell,253-904-8911,tyler@fulltiltfabrication.com
+STEEL/TRUSSES,Meyer Metals Inc,Tyler Meyer,425-422-3205,tyler_meyer212@hotmail.com
+STEEL/TRUSSES,Nelson Structures Network LLC,Mike Nelson,206-423-3088,mnelson@nsn-nw.com
+STEEL/TRUSSES,Profile Steel,Blake Flood,425-744-9744,blake@profilesteel.com
+STEEL/TRUSSES,Steel Encounters,Miriam Stone,206-204-8504,miriamstone@steelencounters.com
+STEEL/TRUSSES,Wesweld,Steve,360-708-3556,steve@wesweldcorp.com
+REBAR / RESTEEL,AAA Welding Co.,Joe Cook,253-854-4701,Joe@aaaweldingcs.com
+REBAR / RESTEEL,CT Sales,James House,425-483-0101,bids@ctsalesinc.net
+REBAR / RESTEEL,Harris Rebar,Mike Cadle,253-847-5001,seattle@harrisrebar.com
+REBAR / RESTEEL,Manor Hardware,John Gustafson,206-999-6597,gustafson@southerncarlson.com
+REBAR / RESTEEL,Valley Construction Supply,Gene Gierek,253-863-6354,sales6@valleyconstructionsupply.com
+SHEET METAL,Ballard Sheetmetal,Will,206-729-4729,WilliamJ@ballardsheetmetal.com
+SHEET METAL,General Sheet Metal,Jim Mallett/Jesse,360-456-6136,jim@generalsheetmetalinc.com/ Jesse@generalsheetmetalinc.com
+SHEET METAL,Jas Steel,Jessica Griffith,425-424-2107,jasfab@frontier.com
+SHEET METAL,Mantis Mfg,Kevin,425-773-5893,kevin@mantismfg.com
+SHEET METAL,Northshore Sheetmetal,Dave Masters,425-740-9265,dave@northshoreext.com
+SHEET METAL,Northwest Sheet Metal,Steve Glacken,425-754-1258,northwestsheetmetal@outlook.com
+SHEET METAL,Precision Fabricators,Ken,206-362-1195,psmfseattle@gmail.com
+MILLWORK,Architectural Millwork,Rick McPike,253-691-8975,rickeym@architectural-millwork.com
+MILLWORK,Custom Craft,Leary Jobe,253-826-5450,leary@teamcustomcraft.com
+MILLWORK,Custom Interiors,Jesse Peters,360-658-5318,jesse@custominteriors.biz
+MILLWORK,Evergreen Furnishings,Todd Cunningham,206-779-6597,todd@evergreenfurnishings.com
+MILLWORK,Fineline Fixture & Case,Phil Trueax,360-659-6464,finelinefix@frontier.com
+MILLWORK,Interior Wood Products,Brian Ritter,360-352-7273,brian@interiorwoodproducts.com
+MILLWORK,Interior Enviroments,Rich,206-432-8800,richl@iecustom.com
+MILLWORK,Liberty Casework,Mike Kimball,253-507-7456,mikek@libertycasework.com
+MILLWORK,Modern Custom Casework,Jim Mammina,360-909-8785,jim@moderncw.com
+MILLWORK,NW Stone Fabricators,Roger Swearington,425-881-4071,roger@nwstonefab.com
+MILLWORK,NW Woodworks,James Mekeel,425-482-0922,rfp@nwwi.biz
+MILLWORK,PARR Cabinets,Brad Wilson,206-621-7277,brad.wilson@parr.com
+MILLWORK,Premium Installation-INSTALL only,Ben Rodriguez,360-913-3318,premium.installationsmillwork@gmail.com
+MILLWORK,QA Group-Banquest Seating,Seth Emtage,,seth@qagroup.us
+MILLWORK,Topline Counters,Kevin Parker,253-826-5480,kevinp@toplinecounters.com
+MILLWORK,W.W. Wells,Andy Hopkins,206-624-7764,ahopkins@wwwells.com
+PLASTERING & STUCCO,JJ Jefferson,Scott Wagner,206-633-2944,ScottW@JJJefferson.com
+PLASTERING & STUCCO,MD Exteriors,Matt,425-265-1500,matt@mdexteriors.com
+PLASTERING & STUCCO,M&M Plastering,Jan,206-799-7657,janski717@gmail.com
+SIDING,CR Siding,Larry Freeman,360-668-4182,larryfreeman@crsiding.com
+INSULATION,CWallA,Jeff Tilbury,425-892-4402,Jefftilbury@cwalla.com
+INSULATION,Insulation For Less,Darrin Baasch,253-651-6022,Darrin@insulation4lesswa.com
+INSULATION,Magellan Insulation,Tom Smith,253-486-8992,TSmith@iconinsul.com
+INSULATION,USA Burnham Insulation,Lindsey Wilks,425-881-2666,lwilks@usiinc.com
+ROOFING,Axiom D7,Jon Williams,425-299-8186,jon@axiomd7.net
+ROOFING,Chinook Roofing,Thorn Martin,253-517-0884,thorn.martin@chinookroofing.com
+ROOFING,Commercial Industrial Roofing,Brandon Olesen,425-423-0900,brandon@cir-roofing.com
+ROOFING,Flynn Roofing (Formerly Cobra Roofing),Matt Allen,253-797-0064,Matt.Allen@flynncompanies.com
+ROOFING,Franklin Roofing,Carl Rhoades,253-770-5950,Carl@franklinroofingent.com
+ROOFING,Hytech Roofing,Estimating,360-354-4335,hytech@hytechroofing.com
+ROOFING,James King Roofing,Mike Lowery,206-552-3326,mikel@jameskingroofing.com
+ROOFING,Loberg Roofing,Mark,425-344-0906,mark@lobergroofing.com
+ROOFING,MD Exteriors (metal),Matt,425-265-1500,matt@mdexteriors.com
+ROOFING,ORCA Roofing & Exteriors,Andrew Cohen,425-472-2986,andrew@orcaroofing.com
+ROOFING,Rainbow Federal,Stefani Wheeler,425-512-8289,stefanic@rainbowfederal.com
+ROOFING,Roof Corp,Greg Peebles,206-439-9991,greg@roofcorp.com
+ROOFING,Snyder Roofing,Darrin Evans,425-402-1848,devans@snyder-builds.com
+ROOFING,SQI,David Hoskins,206-363-0115,dhoskins@sqiinc.com
+ROOFING,Stanley Roofing,Art Case,425-483-6666,stnrfg@aol.com
+ROOFING,Tri-Star Roofing,Paul Huppert,206-391-2454,tri-starroofing@msn.com
+ROOFING,Wayne’s Roofing,Wayne Fulmer,253-863-4455,bids@waynesroofing.com
+ROOFING,Western Sierra (Metal Roofing/Siding),Mike Stappart,425-328-9124,westernsierrasales@gmail.com
+OPERABLE PARTITIONS,Interior Tech,Andrew Haakenson,206-549-7475,andrew.haakenson@interior-tech.com
+OPERABLE PARTITIONS,McGregor Door & Hardware,Andrew Mortagne,206-241-8242 X103,Andrew.Mortagne@accesssmt.com
+DOORS/HARDWARE,Barclay Dean,John Harvey,425-368-2020,johnh@bdap.com
+DOORS/HARDWARE,B.& O. Lumber,Trygve Oye,425-353-2900,trygve@bolumber.com
+DOORS/HARDWARE,Builders Hdwr.,Matt,206-419-1358,matth@builders-hardware.com
+DOORS/HARDWARE,Cascade Door & Hardware,Glenn Bayha,360-435-0821,glennb@cascadedoorandhardware.com
+DOORS/HARDWARE,Contract Hardware,Steve Sand,206-298-4770,ssand@chihardware.com
+DOORS/HARDWARE,ED Locks & Security,Melhem Juan,877-207-6067,sales@edlocks.com
+DOORS/HARDWARE,Holowchuck Wood Services (Repair),Charles Fares,425-788-4724,touchupguy@holowchuk.comcastbiz.net
+DOORS/HARDWARE,ICS-Interior Const. Specialties,Ernie,425-745-8343,ernie@icsjambs.com
+DOORS/HARDWARE,Innovative Door (Automatic Doors),Kent Galusha,425-316-8154,service@inndoorsol.com
+DOORS/HARDWARE,Interior Tech (Modernfold),Vicki Gonzalez,206-549-7475,vicki.gonzalez@interior-tech.com
+DOORS/HARDWARE,JDS Commercial Door,Brandon Maxfield,425-948-4527,RMaxfield@commercialdoors.com
+DOORS/HARDWARE,North Pacific Door,Chris Pomeroy,503-781-6595,chris@northpacificdoorcorp.com
+DOORS/HARDWARE,Recor Door,Kevin Talley,425-330-3687,kevin@recordoor.com
+DOORS/HARDWARE,ServiceMark (Dirtt) - (Specialty Doors),Hugo Silva,312-973-0919,hugos@servicemarkts.com
+DOORS/HARDWARE,Stanley Door (Automatic Doors),Luke Norris,425-868-0499,Luke.Norris@SBDInc.com
+DOORS/HARDWARE,Washington Hardwoods,Brooke Ranney,360-785-7618,brooke@shakertown.com
+DOORS/HARDWARE,Western Pacific,Troy Ayres,206-571-4815,t.ayres@gowestpac.com
+OVERHEAD DOOR,NW Handling Systems,Rich Waltenburg,425-255-0500,richw@nwhs.com
+OVERHEAD DOOR,Overhead Door of Seattle (Cressy),Brian Danelo,206-394-3315,bdanelo@ohdseattle.com
+OVERHEAD DOOR,Precision Door - No Estimating - On site Measure Only,Tracy,425-608-1219,
+OVERHEAD DOOR,Zesbaugh,Tracy Girouard,206-547-1900 X206,TracyG@zesbaugh.com
+GLASS,Automatic Entries,Glenn Williams,425-745-3860,glenn@automaticentries.com
+GLASS,Brower Glass Tinting (Solar Art),Tony Daly,253-536-4440,tony@solarart.com
+GLASS,Eastside Glass,Pat Swanson,425-822-5392,bidrequests@eastsideglass.com
+GLASS,Generation Glass,Jeff,360-458-4096,jeffgg@fairpoint.net
+GLASS,General Storefront,Walker Poor,360-746-8186,walkerp@genstorefront.com
+GLASS,Goldfinch Brothers,Jerry S,,jerrys@goldfinchbros.com/estimating@goldfinchbros.com
+GLASS,KB Glass & Metal,Dean,425-869-4417,bids@kbglassandmetal.com
+GLASS,Metro Glass,Lisa Rohlfing,425-226-9510 X3029,lisa@metroglassco.com
+GLASS,Pacific Glass & Door,Greg Barnhart,360-653-0121,greg@pacificglass.net
+GLASS,Parker Henry Glass,J. Tyler Johnson,425-827-8742,tyler@parkerhenryglass.com
+GLASS,Perkins Glass,Brian Perkins,206-322-4949,email@perkinsglassseattle.com
+GLASS,Rainier Glass,Bryan Anderson,253-872-8697,Bryan@rainierglass.com
+GLASS,Seattle Glass,Geoff Brunson,206-932-7628,geoffb@seattleglass.com
+GLASS,SGS Glass,Mike Boydstun,206-459-4281,mboydstun@sgsglass.com
+GLASS,Sound Glass,Karin  Johnson,800-468-9949,karinj@soundglass.com
+GLASS,Urban Glass,Brent Harris,360-324-3861,brent@urbanglassllc.com - Mike@urbanglassllc.com
+GLASS,Wakefield Glass,Rick Wakefield,206-241-7359,wakefield@nventure.com
+DRYWALL,Artistic Drywall,Steven Fields,360-652-7570,estimating@artisticdrywall.com
+DRYWALL,Associated Finishes,Doug Varmega,425-898-8196,doug@associatedfinishesinc.com
+DRYWALL,Commercial Wall,Randy,253-939-5290,randybaker@commwallsys.com
+DRYWALL,Crucible Wall Systems,Dathan Williams,206-940-6084,d.williams@cruciblewsi.com
+DRYWALL,Firstline Systems,Andrew Flinn,425-820-1947,Aflinn@firstlinesystems.com
+DRYWALL,Mehrer Drywall,Eric Mehrer/Brent Smith,206-282-4288,bids@mehrer.com.
+DRYWALL,Nelson Drywall,Skip Frederick,253-931-6696,Skip@nelsonconstructioninc.com
+DRYWALL,Olympic Interiors,Robert Orlosky,253-719-3294,robert.orlosky@olympicint.com
+DRYWALL,Puget Sound Walls,Ariana Burton-Rodriguez,206-683-5824,info@pugetsoundwalls.com
+DRYWALL,Spartan Drywall,Dale Graves,206-954-9544,dale@spartandrywallllc.com
+DRYWALL,Talluss Architectural Products,Sandra,206.949.2114,sbrocker@talluss.com
+DRYWALL,United Drywall,Dean Proffit,425-408-1886,dean@unitedci.com
+ACOUSTICAL CEILING,Acoustical Design Inc,Kip Cramer,800-777-9583,kcramer@acousticaldesigninc.com
+ACOUSTICAL CEILING,Architectural Acoustics,Matt Reeves,360-871-7741,matt@archacousticsllc.com
+ACOUSTICAL CEILING,Bee Enterprises,Chad Harrison,253-377-8813,bee-enterprises@outlook.com
+ACOUSTICAL CEILING,Forrest Sound,Estimating,425-881-1111,estimating@forrestsound.com
+ACOUSTICAL CEILING,GL Systems,Mike Stice,206-575-3900,mstice@glsystemsinc.com
+ACOUSTICAL CEILING,Mehrer Drywall,Heather,206-282-4288,bids@mehrer.com.
+ACOUSTICAL CEILING,Parthenon,Are Valvas,360-563-2446,avalvas@parthenonbuildersinc.com
+ACOUSTICAL CEILING,Story Acoustics,Tony,206-447-9606,tony@storyacoustics.com
+ACOUSTICAL CEILING,T Bar Contruction,Jim Ryan,206-682-1186,jim@tbarconstruction.com
+ACOUSTICAL CEILING,9-Wood Ceiling Grille,Jerald Schwarz,206-218-3489,jerald@div-9.com
+FLOORING,Accents Interiors,Erik Polson,425-276-6354,erikp@accents-interiors.com
+FLOORING,Alliance Contract Flooring,Curt Freeman,425-869-1058,curt@AllianceContractFlooring.com
+FLOORING,Apex Flooring,Joe Thacker,253-298-8898,Joe@apexflooring.com
+FLOORING,Associated Inc,Steve Garza,206-763-2537,steve@associatedinc.net
+FLOORING,Axiom Corp,Zeb/Sean,425-747-2500,seanh@axiocorp.com
+FLOORING,Builders Interiors,Ty Mortenson,425-488-7777,ty@buildersinteriors.com
+FLOORING,CF Resource,Mark Tracy,206-662-5163,mtracy@cfresource.com
+FLOORING,CNC Diversified,Jovan Covollo,425-485-7070,jovanc@cnc-diversified.com
+FLOORING,Commercial Floor,Kevin Sutherland,206-767-3077,Kevin@cfloor.com
+FLOORING,Division 9 Flooring,Jaymee Niemann,425-205-4020,estimating@division9flooring.com
+FLOORING,G&W Commercial Flooring (TI's),Matt Johnson,206-566-3197,mattj@gwcinteriors.com
+FLOORING,Legacy Group,Chris Grove,206-217-0310,chris@legacygroupinteriors.com
+FLOORING,Pinnacle Flooring,Ryan Berryhill,253-334-8791,ryanb@pfcwa.com
+FLOORING,Signature Flooring,Pete Frolov,253-241-5683,Pete.Frolov@signatureflooringnw.com
+FLOORING,Spectra Contract Flooring,Nick Miller,425-656-4280,Nick.Miller@spectracf.com
+FLOORING,Valley Flooring,Rich,253-852-7008,richc@valleyfloorinc.com
+WALL COVERINGS,Brets Wall Covering,Bret Harvey,253-579-8171,bret@bretswallcovering.com
+WALL COVERINGS,Scott's Handy Services,Scott Mayfield,253-334-1952,scottmayfield1@outlook.com
+PAINTING,Advanced Painting,Jim Murphy,425-747-8787,jim@advancedptg.com
+PAINTING,Ambiance Coatings Inc,Brian Hajny,253-447-7375,brian@ambiancecoatings.com
+PAINTING,Barmac Painters,Zac Dryden,253-254-9534,zdryden@barmacpainters.com
+PAINTING,C&P Paint LLC,Chad McKnight,206-793-5795,chad@cppaint.com
+PAINTING,Designer Painting,Ken Reberry,360-239-6881,ken@designerpainting.net
+PAINTING,Fawcett Painting,Matt Orse / Stefan,425-251-9664,morse@fawcettpainting.com  -  ssolberg@fawcettpainting.com
+PAINTING,"Hauge & Hassain, Inc.",Anthony Hagberg,206-789-8842,anthonyh@haugeinc.com
+PAINTING,Mehrer Painting,Kurt Mehrer,206-282-4288,bids@mehrer.com.
+PAINTING,Pro Paint Solutions,Mike Barrett/Chris Inman,206-900-2676,mikeb@propaintsolutions.com/chrisI@propaintsolutions.com
+PAINTING,Scott Coatings (Wall Coverings),Scott Mayfield,253-334-1952,ScottMayfield1@outlook.com
+PAINTING,Seattle Painting,Olga Ramazanov,206-366-1750,olga@seattlepainting.com
+PAINTING,Select Painting (Small TI's),Dean Whitehouse,206-533-0035,deanw@selectpaintingservices.com
+PAINTING,Ski's Painting,Mark M,425-218-4887,markm@skispainting.com
+PAINTING,Sunset Painting,Otto Hernandez,253-269-2982,sunsetpainting8@gmail.com
+PAINTING,VP Peri Painting,Vic Peri,425-898-8494,vic@vpperi.com
+PAINTING,Washington Commercial,Josh Griesse,425-576-0411,jgriesse@wa-cp.com
+"MARKERBOARDS, METAL/WIRE SHELVING",Evergreen Furnishings,Todd Cunningham,206-779-6597,todd@evergreenfurnishings.com
+LOCKERS,Building Specialties NW,Jessica Olsen,425-486-3693,bsnwllc@lockedmail.com
+LOCKERS,Evergreen Furnishings,Todd Cunningham,206-779-6597,todd@evergreenfurnishings.com
+FIREPLACES,FireSide Home Solutions,Michael  Mudge,253-553-6193,commercial@firesidedist.com
+AWNING/CANOPIES,Atrium Shade Co.,Allen,206-783-6725,atriumshadeco@qwest.net
+AWNING/CANOPIES,General Awnings,Brian McNiel,888-330-3115X310,Bmcniel@generalawnings.com
+AWNING/CANOPIES,Rainier Shade,Christian Williams,425-981-1223,ChristianW@@rainiershade.com
+CORNER GUARDS,InPro Corporation,Heidi Stetter,800-222-5556,invitationtobid@inprocorp.com
+CORNER GUARDS,RTB Co Inc,Jamieson Thorgalsen,425-455-5044,estimating@rtbcompany.com
+TOILET PARTITIONS AND ACCESSORIES,Barclay Dean Arch. Products,Nick Rogers,425-368-2020,nickr@bdap.com
+TOILET PARTITIONS AND ACCESSORIES,BMS,Erin Born,503-519-1126,erin@bms-washington.com
+TOILET PARTITIONS AND ACCESSORIES,Crowe Building Specilaties,Tralina McKinght,425-967-0400,estimating@crowebldg.com
+TOILET PARTITIONS AND ACCESSORIES,Foster Bray,Kevin Bray,425-369-4933,kevin@fosterbray.com
+TOILET PARTITIONS AND ACCESSORIES,Li'l Chief Specilaties,Stan JauJou,206-364-1244,stan@lilchief.com
+TOILET PARTITIONS AND ACCESSORIES,"NW Partitions, Inc.",Chris Ayers,425-375-2500,bids@nwpart.com
+TOILET PARTITIONS AND ACCESSORIES,WH Cress,Jason Baumgardt,425-334-8984,Jason@whcress.com
+TOILET PARTITIONS AND ACCESSORIES,Zesbaugh Inc.,Tracy Girouard,206-547-1900 X206,TracyG@zesbaugh.com
+LOADING DOCK EQUIPMENT,NW Handling Systems,Rich Waltenburg,425-255-0500,richw@nwhs.com
+LOADING DOCK EQUIPMENT,Pace Material Handling,Bob Oury,253-872-9006,bob.oury@pmhinc.com
+APPLIANCES,General Builders Supply,Eric Sundene,206-243-9800,esundene@genbldrs.com
+APPLIANCES,Metropolitan Appliance,Jim Freedman,206-623-8811,jim@metropolitanappliance.com
+MOVING SERVICES,Urban Family,Ed Hubeek,206-601-8822,ed.hubeek@gmail.com
+WINDOW COVERINGS,Infinity Window Coverings,Brad Grathwohl,425-487-6151,brad@infinitiblinds.com
+WINDOW COVERINGS,Iris Window Coverings,Madison Bulow,425-793-9398,estimating@iriswc.com
+WINDOW COVERINGS,Penthouse Drapery,Trent Tsuchikawa,206-292-8336,trent@penthousedrapery.com
+WINDOW COVERINGS,Shine-A-Blind,Ryan Lee,425-771-7799,Ryan@shineablind.net
+ELEVATOR,Eltec Systems,Gordon Ferguson,206-405-3371,gferguson@eltec.cc
+ELEVATOR,Otis,Scott Bradley,206-248-6426,scott.bradley@otis.com
+ELEVATOR,Schindler Elevator,Robert Dunn,206-291-3000,Robert.Dunn@.schindler.com
+ELEVATOR,Vertical Dimensions,Chris Glassner,206-767-8022,cglassner@verticaldimensions.net
+FIRE EXTINGUISHERS,Fire King Performance Systems,Larry Smith,425-287-7268,larry.Smith@firekingofseattle.com
+FIRE PROTECTION,Advanced Fire Protection,Bill,425-483-5657,bill@advfire.net
+FIRE PROTECTION,Archer Construction,Jim Tierney-Rick Villyard,206-898-7736,jtierney@archerconstruction.com - Rick@archerconstruction.com
+FIRE PROTECTION,Columbia Fire,Brian Schulze,206-232-8569,Brian.Schulze@columbiafire.net
+FIRE PROTECTION,Convergint (Carillon Point),Larry O'Neill,206-963-1083,larry.oneal@convergint.com
+FIRE PROTECTION,Convergint (Carillon Point),Peter Cavaliere,206-963-1083,pete.cavaliere@convergint.com
+FIRE PROTECTION,Cosco Fire Protection,Ken Long,206-438-3362,KLong@coscofire.com
+FIRE PROTECTION,Emerald Fire,Joel Marler,253-606-1197,Joelm@emeraldfirellc.com
+FIRE PROTECTION,Fire Sprinklers Inc,Matthew Rapozo,253-826-0099,matthewr@firesprinklersinc.com
+FIRE PROTECTION,Fire Systems West,Theron Davis,253-833-1248,therond@firesystemswest.com
+FIRE PROTECTION,First Defense,LaMonte Mang,360-794-9479,firstdefensefire@hotmail.com
+FIRE PROTECTION,McKinstry,Jordan Pasternak,206-762-3311,McKFSBids@mckinstry.com
+FIRE PROTECTION,Patriot Fire System,John Dacca,253-284-3467,JohnD@patriotfire.com
+FIRE PROTECTION,Smith Fire Protection,Jim Pommert,253-926-1880,jpommert@smithfire.com
+FIRE PROTECTION,The Safety Team,Cindy Lucas,206-762-1450,cindy@thesafetyteaminc.com
+FIRE PROTECTION,Western States Fire,Aaron Gudmundson,425-881-0100,Aaron.gudmundson@wsfp.us
+PLUMBING,American Mechanical,Rod Gordon,206-227-1421,Rod@americanmechanicalcorp.com
+PLUMBING,Enviromech,Jeff Reindel,206-762-1960,JeffR@Enviromech.com
+PLUMBING,Hermanson (Seattle Projects),Loren Moyer,206-948-3651,lmoyer@hermanson.com
+PLUMBING,Hermanson (Other Projects),Jay Danner,206-743-7494,jdanner@hermanson.com
+PLUMBING,Local Plumbing,Bob Satko,206-396-6219,satko@outlook.com
+PLUMBING,MacDonald Miller,Levi Baker,425-472-4333,Levi.Baker@Macmiller.com
+PLUMBING,McKinstry,Jordan Pasternak,206-762-3311,JordanP@mckinstry.com
+PLUMBING,Ritter Plumbing,Jacob,206-769-6914,jacob@ritterplumbingmech.com
+PLUMBING,SJS Mechanical,Craig Coffey,206-763-0334,craig@sjsmech.com
+PLUMBING,State Mechanical,Gerrik Platz,206-575-7527,gerrik@statemech.net
+PLUMBING,Total Plumbing,Bob Panini,253-445-8503,bob@totalplumbing.us
+HVAC,ACCO Engineered Systems,Scott Ellis,206-787-8500,sellis@accoes.com
+HVAC,All Star Heating,Seth Hindt,425-222-7652,Seth@allstar-hvac.com
+HVAC,Apollo Mechanical,Stephanie Carrero,425-390-7227,Stephanie.Carrero@apollomech.com
+HVAC,"CFM Heating & Cooling, Inc.",Dave Evans,425-821-1293,dave@cfm-hvacr.com
+HVAC,Comfort Mechanical,Brian Mahlum,206-963-1171,Brandon@comfortmech.com
+HVAC,Eco-Tech Mechanical LLS,Kevin McLeod,425-614-8909,kevin@eco-techmechanical.com
+HVAC,Enviromech,Mike Timmons,206-762-1960,michaelt@enviromech.com
+HVAC,Evergreen Refrigeration,Jason Stanton,206-763-1744,jason@evergreenhvac.com
+HVAC,Five Star Comfort,Andrey Heichenko,425-345-6416,andrey@fivestarcomfort.com
+HVAC,GB Systems,Greg Berg,425-482-0584,GregB@GBS-HVAC.com
+HVAC,Hermanson Company,Kyle Louie,253-293-4658,KLouie@hermanson.com
+HVAC,MacDonald Miller,Loren Moyer,206-843-4292,loren.moyer@macmiller.com
+HVAC,McKinstry,Jordan Pasternak,206-762-3311,JordanP@mckinstry.com
+HVAC,Pacific Air Control (Design-Build TI's),Morgan Rosin,425-273-2978,Morganr@pacificaircontrol.com
+HVAC,Performance Mechancial Group,Kenny Miller,206-551-1717,kenny@pmghvac.com
+HVAC,Pinchiff Mechanical,Ken,,kenp@pinchiffmechanical.com
+HVAC,HVAC (Continued),,,
+HVAC,Precise Heating & Cooling,LaMar Moore,206-510-4250,LaMar@preciseheatandcool.com
+HVAC,PSF Mechanical,Jim Hardie,206-771-1380,jhardie@psfmech.com
+HVAC,PSR Mechanical,Neal Henry,206-946-2998,Neal.Henry@psrmechanical.com
+HVAC,System Mechanical,Ryan Brown,206-300-2737,ryanb@systemseattle.com
+HVAC,Team Mechancial,Jeffrey Saether,360-805-1835,teammechanical@aol.com
+HVAC,United Mechanical,Camilla Yamada,206-364-9900,Cyamada@umci.com
+HVAC,Universal Mechanical,Anthony Viega,206-510-9902,anthony@unimec.com
+HVAC,Universal Refrigeration-CoolSys,Heath Hamblen/Aidan,253-939-5501,Heath.Hamblem@coolsys.com/ Aidan.wilson@coolsys.com
+ELECTRICAL,Abacus Electric,Kevin Ullrich,253-984-1611,kevin@abacuselectricllc.com
+ELECTRICAL,AIM Electric,Andy,206-909-4907,andy@aimelectric.net
+ELECTRICAL,Associated Electric,Mark Anderson,425-334-1955,manderson@associatedelectric.net
+ELECTRICAL,Cochran Electric,Donal Barnes,206-963-3546,dbarnes@cochraninc.com
+ELECTRICAL,CTC Electric,Tom Ray,253-350-0966,ctrelectric7@gmail.com
+ELECTRICAL,Electri-City,Malcolm,425-672-6797,malcolm@electri-cityinc.com
+ELECTRICAL,Evergreen Electric,Joe Hempel,360-320-7407,hempel@eessite.com
+ELECTRICAL,Evergreen Power Systems,Mike Yalowicki,206-255-7813,myalowicki@evergreenps.net
+ELECTRICAL,Hampton Electric,Dave,425-486-4230,daveh@hamcom.com
+ELECTRICAL,H&M Electric,Josh Unger,360-658-0501,Josh.Unger@hmelec.com
+ELECTRICAL,Horizon Electric Builds (Small TI's),Kenny Mueller,425-760-4599,Kenny.mueller@horizonelectricbuilds.com
+ELECTRICAL,HP Electric,Eric Pierce,425-485-4321,eric@hpelectricllc.com
+ELECTRICAL,Jennings Electric,Scott Jennings,253-691-1376,scott@jenningselectricinc.com
+ELECTRICAL,Johnson Electric,Josh Unger,425-821-8226,joshu@johnsonelect.com
+ELECTRICAL,Kirby Electric,Chris Briejer,253-859-2000,chrisb@kirbyelectric.com
+ELECTRICAL,Lundstrum Electric,Sarah Monroe,206-930-0057,sarah@lunstrumelectric.com
+ELECTRICAL,MB Electric,Oscar Arett,,oscar@mbelectricllc.com
+ELECTRICAL,MCH Electric,Martin Chavero,253-250-5195,martin.c@mch-electric.com
+ELECTRICAL,Olsen Electric,Jordan West,253-872-1905,jordanw@olsenelectric.net
+ELECTRICAL,Precision Electric,Jeff Kusler,206-948-2090,jeffreyK@precisionelectricgroup.com
+ELECTRICAL,Pride Electric,Chris Goad,425-454-3665,cgoad@prideelectric.com
+ELECTRICAL,Prime Electric,Alex Walkup,425-890-1446,Alex.walkup@primee.com
+ELECTRICAL,Pro-Tech Electric,Nick Dammann,425-334-9844,nick@pro-techelectric.com
+ELECTRICAL,Range Electric,Eric Sloss/Drew Massey,253-886-1610,ericsloss@range-electric.com - dmassey@range-electric.com
+ELECTRICAL,SeaTac Electric,Bradley Robinson,253-872-5553,bids@seatacelectric.com
+ELECTRICAL,Steele Electric,Travis Steele,888-404-2882,travis@steeleec.com
+ELECTRICAL,Titan Electric,Larry Fung,425-250-3430,LarryF@titanelectric.net
+ELECTRICAL,Valley Electric,,,estimating@velectric.com
+ELECTRICAL,"Veca Electric (OUS, TUS, PP)",Charles Lang,206-304-1894,charles.lang@veca.com
+ELECTRICAL,Westergreen Electric,Austin Westergreen,425-737-1178,westergreenelectric@gmail.com
+FIRE ALARM,B&H Fire,Jeff Brossard,425-244-1445,"jeff@bnhfire.com, Hailey@bnhfire.com"
+FIRE ALARM,Bay Alarm,Josh Oberlander,425-215-6044,joshua.oberlander@bayalarm.com
+FIRE ALARM,Convergint (Carillon Point),Pete Cavaliere,425-272-2250,pete.cavaliere@convergint.com
+FIRE ALARM,Convergint,Aaron Potter,206-249-2242,aaron.potter@convergint.com
+FIRE ALARM,Fire Systems West,Matt Carlman,253-833-1248,MattC@firesystemswest.com
+FIRE ALARM,Froula Alarm Systems,JD Dunlop,206-575-1962,JD@froulaalarms.com
+FIRE ALARM,Guardian Security,Travis Quaale,206-622-6545,tquaale@guardiansecurity.com
+FIRE ALARM,Hi-Tech Security,Jeff Gonzales,360-452-2727,jeff.gotohitech@gmail.com
+FIRE ALARM,LINX Integrated,Paul Powloski,253-848-3036,Paul-P@linxnw.com
+FIRE ALARM,ProComm Protection & Comm.,Lyle Wells,425-774-9099,Lylew@procommwa.com
+FIRE ALARM,The Safety Team,Cindy Lucas,206-762-1450,cindy@thesafetyteaminc.com
+FIRE ALARM,Western States Fire,Aaron Gudmundson,425-881-0100,aaron.gudmundson@wsfp.us
+LOW VOLTAGE,ClearNet Communications,Andy Steenvoorde,206-420-6970,andy@clrnet.net
+LOW VOLTAGE,Integrated Technologies,Mark Sutton,206-235-8580,Mark.Sutton@theitgroup-inc.com
+ACCESS CONTROLS,Convergint Technologies,Kevin Currey,206-963-1083,Kevin.currey@convergint.com
+ACCESS CONTROLS,Differential Networks,Mark Rindy,360-366-8123,markr@differentialnetworks.com
+ACCESS CONTROLS,DGM Controls,Jim Clark,206-284-6919,jim@dgmcontrols.com
+ACCESS CONTROLS,TelData Systems,Peder Rongen,206-682-8721,prongen@teldatainc.com

@@ -1,0 +1,405 @@
+{
+  "template": "/Volumes/TCL_DATA 1TB/TCL Partners Dropbox/Ryan Caton/TCL/TCL_SOV_TEMPLATE GBT.xlsm",
+  "lock": "/Users/tclserver/TCL_BRAIN/schema/TCL_SOV_TEMPLATE_GBT.lock.v1.json",
+  "writes": [
+    {
+      "sheet": "ESTIMATE (INPUT)",
+      "match": {
+        "trade": "Concrete"
+      },
+      "write": {
+        "column": "AMOUNT",
+        "value": 3295.0
+      },
+      "meta": {
+        "project": "C4WLS - St. Francis",
+        "option": "BOTH",
+        "trade": "Concrete",
+        "bucket_code": "QUOTE",
+        "line_id": "Concrete:ARH Inc"
+      },
+      "cell": "I70",
+      "source": {
+        "source_type": "pdf",
+        "source_path": "/Volumes/TCL_DATA 1TB/TCL Partners Dropbox/TCL Partners Dropbox/TCL_Server/_Estimates/C4WLS  St. Francis/Sub Bids/UR.pdf",
+        "locator": "pages:1-2",
+        "vendor": "ARH Inc"
+      }
+    },
+    {
+      "sheet": "ESTIMATE (INPUT)",
+      "match": {
+        "trade": "Millwork"
+      },
+      "write": {
+        "column": "AMOUNT",
+        "value": 52443.0
+      },
+      "meta": {
+        "project": "C4WLS - St. Francis",
+        "option": "BOTH",
+        "trade": "Millwork",
+        "bucket_code": "QUOTE",
+        "line_id": "Millwork:W.W. Wells"
+      },
+      "cell": "I91",
+      "source": {
+        "source_type": "pdf",
+        "source_path": "/Volumes/TCL_DATA 1TB/TCL Partners Dropbox/TCL Partners Dropbox/TCL_Server/_Estimates/C4WLS  St. Francis/Sub Bids/WW Wells.pdf",
+        "locator": "pages:1-2",
+        "vendor": "W.W. Wells"
+      }
+    },
+    {
+      "sheet": "ESTIMATE (INPUT)",
+      "cell": "I160",
+      "write": {
+        "value": 5064.0
+      },
+      "match": {
+        "trade": "Painting"
+      },
+      "meta": {
+        "project": "C4WLS - St. Francis",
+        "option": "BOTH",
+        "trade": "Painting",
+        "bucket_code": "QUOTE",
+        "line_id": "Painting:Pro Paint Solutions"
+      },
+      "source": {
+        "source_type": "pdf",
+        "source_path": "/Volumes/TCL_DATA 1TB/TCL Partners Dropbox/TCL Partners Dropbox/TCL_Server/_Estimates/C4WLS  St. Francis/Sub Bids/Pro Paint Solutions.pdf",
+        "locator": "pages:1-2",
+        "notes": ""
+      }
+    },
+    {
+      "sheet": "ESTIMATE (INPUT)",
+      "cell": "I131",
+      "write": {
+        "value": 9971.0
+      },
+      "match": {
+        "trade": "Drywall"
+      },
+      "meta": {
+        "project": "C4WLS - St. Francis",
+        "option": "UNKNOWN",
+        "trade": "Drywall",
+        "bucket_code": "QUOTE",
+        "line_id": "Drywall:Olympic"
+      },
+      "source": {
+        "source_type": "pdf",
+        "source_path": "/Volumes/TCL_DATA 1TB/TCL Partners Dropbox/TCL Partners Dropbox/TCL_Server/_Estimates/C4WLS  St. Francis/Sub Bids/Olympic.pdf",
+        "locator": "pages:1-2",
+        "notes": ""
+      }
+    },
+    {
+      "cell": "O7",
+      "sheet": "ESTIMATE (INPUT)",
+      "write": {
+        "value": null
+      },
+      "source": {
+        "source_type": "pdf",
+        "source_path": "/Volumes/TCL_DATA 1TB/TCL Partners Dropbox/TCL Partners Dropbox/TCL_Server/_Estimates/C4WLS  St. Francis/Sub Bids/UR.pdf",
+        "locator": "pages:1-2",
+        "vendor": "ARH Inc",
+        "notes": "redirect_down_from_merged(O2:R2)"
+      },
+      "meta": {
+        "project": "C4WLS - St. Francis",
+        "option": "BOTH",
+        "trade": "HEADER",
+        "bucket_code": "HEADER",
+        "line_id": "HEADER:PROJECT"
+      },
+      "match": {
+        "field": "PROJECT"
+      }
+    },
+    {
+      "cell": "O7",
+      "sheet": "ESTIMATE (INPUT)",
+      "write": {
+        "value": null
+      },
+      "source": {
+        "source_type": "pdf",
+        "source_path": "/Volumes/TCL_DATA 1TB/TCL Partners Dropbox/TCL Partners Dropbox/TCL_Server/_Estimates/C4WLS  St. Francis/Sub Bids/UR.pdf",
+        "locator": "pages:1-2",
+        "vendor": "ARH Inc",
+        "notes": "redirect_down_from_merged(O3:R3)"
+      },
+      "meta": {
+        "project": "C4WLS - St. Francis",
+        "option": "BOTH",
+        "trade": "HEADER",
+        "bucket_code": "HEADER",
+        "line_id": "HEADER:JOB NO."
+      },
+      "match": {
+        "field": "JOB NO."
+      }
+    },
+    {
+      "cell": "O7",
+      "sheet": "ESTIMATE (INPUT)",
+      "write": {
+        "value": null
+      },
+      "source": {
+        "source_type": "pdf",
+        "source_path": "/Volumes/TCL_DATA 1TB/TCL Partners Dropbox/TCL Partners Dropbox/TCL_Server/_Estimates/C4WLS  St. Francis/Sub Bids/UR.pdf",
+        "locator": "pages:1-2",
+        "vendor": "ARH Inc",
+        "notes": "redirect_down_from_merged(O4:R4)"
+      },
+      "meta": {
+        "project": "C4WLS - St. Francis",
+        "option": "BOTH",
+        "trade": "HEADER",
+        "bucket_code": "HEADER",
+        "line_id": "HEADER:LOCATION"
+      },
+      "match": {
+        "field": "LOCATION"
+      }
+    },
+    {
+      "cell": "H4",
+      "sheet": "ESTIMATE (INPUT)",
+      "write": {
+        "value": null
+      },
+      "source": {
+        "source_type": "pdf",
+        "source_path": "/Volumes/TCL_DATA 1TB/TCL Partners Dropbox/TCL Partners Dropbox/TCL_Server/_Estimates/C4WLS  St. Francis/Sub Bids/UR.pdf",
+        "locator": "pages:1-2",
+        "vendor": "ARH Inc"
+      },
+      "meta": {
+        "project": "C4WLS - St. Francis",
+        "option": "BOTH",
+        "trade": "HEADER",
+        "bucket_code": "HEADER",
+        "line_id": "HEADER:TOTAL_SF"
+      },
+      "match": {
+        "field": "TOTAL_SF"
+      }
+    },
+    {
+      "cell": "H6",
+      "sheet": "ESTIMATE (INPUT)",
+      "write": {
+        "value": null
+      },
+      "source": {
+        "source_type": "pdf",
+        "source_path": "/Volumes/TCL_DATA 1TB/TCL Partners Dropbox/TCL Partners Dropbox/TCL_Server/_Estimates/C4WLS  St. Francis/Sub Bids/UR.pdf",
+        "locator": "pages:1-2",
+        "vendor": "ARH Inc"
+      },
+      "meta": {
+        "project": "C4WLS - St. Francis",
+        "option": "BOTH",
+        "trade": "HEADER",
+        "bucket_code": "HEADER",
+        "line_id": "HEADER:COST/SF"
+      },
+      "match": {
+        "field": "COST_SF"
+      },
+      "value": "178.20"
+    },
+    {
+      "cell": "T2",
+      "sheet": "ESTIMATE (INPUT)",
+      "write": {
+        "value": null
+      },
+      "source": {
+        "source_type": "pdf",
+        "source_path": "/Volumes/TCL_DATA 1TB/TCL Partners Dropbox/TCL Partners Dropbox/TCL_Server/_Estimates/C4WLS  St. Francis/Sub Bids/UR.pdf",
+        "locator": "pages:1-2",
+        "vendor": "ARH Inc"
+      },
+      "meta": {
+        "project": "C4WLS - St. Francis",
+        "option": "BOTH",
+        "trade": "HEADER",
+        "bucket_code": "HEADER",
+        "line_id": "HEADER:DATE"
+      },
+      "match": {
+        "field": "DATE"
+      },
+      "value": "01/08/2026"
+    },
+    {
+      "cell": "T3",
+      "sheet": "ESTIMATE (INPUT)",
+      "write": {
+        "value": null
+      },
+      "source": {
+        "source_type": "pdf",
+        "source_path": "/Volumes/TCL_DATA 1TB/TCL Partners Dropbox/TCL Partners Dropbox/TCL_Server/_Estimates/C4WLS  St. Francis/Sub Bids/UR.pdf",
+        "locator": "pages:1-2",
+        "vendor": "ARH Inc"
+      },
+      "meta": {
+        "project": "C4WLS - St. Francis",
+        "option": "BOTH",
+        "trade": "HEADER",
+        "bucket_code": "HEADER",
+        "line_id": "HEADER:ESTIMATOR"
+      },
+      "match": {
+        "field": "ESTIMATOR"
+      },
+      "value": "RNC"
+    },
+    {
+      "sheet": "ESTIMATE (INPUT)",
+      "cell": "O7",
+      "write": {
+        "value": "C4WLS - St. Francis"
+      },
+      "source": {
+        "source_type": "pdf",
+        "source_path": "/Volumes/TCL_DATA 1TB/TCL Partners Dropbox/TCL Partners Dropbox/TCL_Server/_Estimates/C4WLS  St. Francis/Sub Bids/UR.pdf",
+        "locator": "pages:1-2",
+        "vendor": "ARH Inc",
+        "notes": "redirect_down_from_merged(O2:R2)"
+      },
+      "meta": {
+        "project": "C4WLS - St. Francis",
+        "option": "BOTH",
+        "trade": "Concrete",
+        "bucket_code": "QUOTE",
+        "line_id": "Concrete:ARH Inc"
+      }
+    },
+    {
+      "sheet": "ESTIMATE (INPUT)",
+      "cell": "O7",
+      "write": {
+        "value": "TBD"
+      },
+      "source": {
+        "source_type": "pdf",
+        "source_path": "/Volumes/TCL_DATA 1TB/TCL Partners Dropbox/TCL Partners Dropbox/TCL_Server/_Estimates/C4WLS  St. Francis/Sub Bids/UR.pdf",
+        "locator": "pages:1-2",
+        "vendor": "ARH Inc",
+        "notes": "redirect_down_from_merged(O3:R3)"
+      },
+      "meta": {
+        "project": "C4WLS - St. Francis",
+        "option": "BOTH",
+        "trade": "Concrete",
+        "bucket_code": "QUOTE",
+        "line_id": "Concrete:ARH Inc"
+      }
+    },
+    {
+      "sheet": "ESTIMATE (INPUT)",
+      "cell": "O7",
+      "write": {
+        "value": "St. Francis"
+      },
+      "source": {
+        "source_type": "pdf",
+        "source_path": "/Volumes/TCL_DATA 1TB/TCL Partners Dropbox/TCL Partners Dropbox/TCL_Server/_Estimates/C4WLS  St. Francis/Sub Bids/UR.pdf",
+        "locator": "pages:1-2",
+        "vendor": "ARH Inc",
+        "notes": "redirect_down_from_merged(O4:R4)"
+      },
+      "meta": {
+        "project": "C4WLS - St. Francis",
+        "option": "BOTH",
+        "trade": "Concrete",
+        "bucket_code": "QUOTE",
+        "line_id": "Concrete:ARH Inc"
+      }
+    },
+    {
+      "sheet": "ESTIMATE (INPUT)",
+      "cell": "U3",
+      "write": {
+        "value": ""
+      },
+      "source": {
+        "source_type": "pdf",
+        "source_path": "/Volumes/TCL_DATA 1TB/TCL Partners Dropbox/TCL Partners Dropbox/TCL_Server/_Estimates/C4WLS  St. Francis/Sub Bids/UR.pdf",
+        "locator": "pages:1-2",
+        "vendor": "ARH Inc"
+      },
+      "meta": {
+        "project": "C4WLS - St. Francis",
+        "option": "BOTH",
+        "trade": "Concrete",
+        "bucket_code": "QUOTE",
+        "line_id": "Concrete:ARH Inc"
+      }
+    },
+    {
+      "sheet": "ESTIMATE (INPUT)",
+      "cell": "O2",
+      "value": "C4WLS - St. Francis",
+      "source": {
+        "source_type": "pdf",
+        "source_path": "/Volumes/TCL_DATA 1TB/TCL Partners Dropbox/TCL Partners Dropbox/TCL_Server/_Estimates/C4WLS  St. Francis/Sub Bids/UR.pdf",
+        "locator": "pages:1-2",
+        "vendor": "ARH Inc"
+      },
+      "meta": {
+        "project": "C4WLS - St. Francis",
+        "option": "BOTH",
+        "trade": "HEADER",
+        "bucket_code": "HEADER",
+        "line_id": "HEADER:PROJECT"
+      }
+    },
+    {
+      "sheet": "ESTIMATE (INPUT)",
+      "cell": "O3",
+      "value": "TBD",
+      "source": {
+        "source_type": "pdf",
+        "source_path": "/Volumes/TCL_DATA 1TB/TCL Partners Dropbox/TCL Partners Dropbox/TCL_Server/_Estimates/C4WLS  St. Francis/Sub Bids/UR.pdf",
+        "locator": "pages:1-2",
+        "vendor": "ARH Inc"
+      },
+      "meta": {
+        "project": "C4WLS - St. Francis",
+        "option": "BOTH",
+        "trade": "HEADER",
+        "bucket_code": "HEADER",
+        "line_id": "HEADER:JOB NO."
+      }
+    },
+    {
+      "sheet": "ESTIMATE (INPUT)",
+      "cell": "O4",
+      "value": "16000 Mill Creek Blvd, suite",
+      "source": {
+        "source_type": "pdf",
+        "source_path": "/Volumes/TCL_DATA 1TB/TCL Partners Dropbox/TCL Partners Dropbox/TCL_Server/_Estimates/C4WLS  St. Francis/Sub Bids/UR.pdf",
+        "locator": "pages:1-2",
+        "vendor": "ARH Inc"
+      },
+      "meta": {
+        "project": "C4WLS - St. Francis",
+        "option": "BOTH",
+        "trade": "HEADER",
+        "bucket_code": "HEADER",
+        "line_id": "HEADER:LOCATION"
+      }
+    }
+  ],
+  "template_sha256": "6f74e739c44964276e2103994a7a8983fd3c5f948f087a769f17e9139c052363"
+}

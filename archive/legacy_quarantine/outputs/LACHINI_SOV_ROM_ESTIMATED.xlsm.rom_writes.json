@@ -1,0 +1,51 @@
+{
+  "rom_writes": [
+    {
+      "code": 1630,
+      "row": 30,
+      "total": 2500
+    },
+    {
+      "code": 9100,
+      "row": 131,
+      "total": 125000
+    },
+    {
+      "code": 9250,
+      "row": 138,
+      "total": 112500
+    },
+    {
+      "code": 9500,
+      "row": 147,
+      "total": 75000
+    },
+    {
+      "code": 9900,
+      "row": 165,
+      "total": 62500
+    },
+    {
+      "code": 15300,
+      "row": 190,
+      "total": 125000
+    },
+    {
+      "code": 15400,
+      "row": 198,
+      "total": 225000
+    },
+    {
+      "code": 15500,
+      "row": 206,
+      "total": 225000
+    },
+    {
+      "code": 16000,
+      "row": 214,
+      "total": 250000
+    }
+  ],
+  "override_writes": [],
+  "skipped_self_perf_subs": []
+}

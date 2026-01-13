@@ -1,0 +1,174 @@
+#!/usr/bin/env python3
+import os, json, uuid, time
+from datetime import datetime, timezone
+import requests
+import msal
+
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+
+GRAPH = "https://graph.microsoft.com/v1.0"
+
+STATE_DIR = os.path.join(BASE_DIR, "state")
+INBOX_DROP = os.path.join(BASE_DIR, "inbox_drop")
+
+STATE_FILE = os.path.join(STATE_DIR, "email_poller_graph.state.json")
+MSG_MAP_FILE = os.path.join(STATE_DIR, "email_poller_graph.msgid_to_uid.json")
+
+DEFAULT_FOLDERS = ["Inbox", "SentItems"]  # add "Drafts" if you really want
+SENTITEMS_CUTOFF_KEY = "sentitems_cutoff_utc"
+
+def utc_now_z() -> str:
+    return datetime.now(timezone.utc).replace(microsecond=0).isoformat().replace("+00:00", "Z")
+
+def ensure_dirs():
+    os.makedirs(STATE_DIR, exist_ok=True)
+    os.makedirs(INBOX_DROP, exist_ok=True)
+
+def load_json(path: str, default):
+    try:
+        with open(path, "r") as f:
+            return json.load(f)
+    except FileNotFoundError:
+        return default
+
+def save_json(path: str, obj):
+    tmp = path + ".tmp"
+    with open(tmp, "w") as f:
+        json.dump(obj, f, indent=2, ensure_ascii=False)
+    os.replace(tmp, path)
+
+def get_token(tenant: str, client_id: str, secret: str) -> str:
+    app = msal.ConfidentialClientApplication(
+        client_id=client_id,
+        authority=f"https://login.microsoftonline.com/{tenant}",
+        client_credential=secret,
+    )
+    tok = app.acquire_token_for_client(scopes=["https://graph.microsoft.com/.default"])
+    if "access_token" not in tok:
+        raise RuntimeError(f"TOKEN_FAIL {tok.get('error')} {tok.get('error_description')}")
+    return tok["access_token"]
+
+def graph_get(url: str, headers: dict, params=None) -> dict:
+    r = requests.get(url, headers=headers, params=params, timeout=30)
+    if r.status_code != 200:
+        try:
+            body = r.json()
+        except Exception:
+            body = {"raw": r.text[:2000]}
+        raise RuntimeError(f"GRAPH_GET_FAIL status={r.status_code} url={url} body={body}")
+    return r.json()
+
+def make_event(msg: dict, mailbox_upn: str, uid: int, folder: str) -> dict:
+    frm = msg.get("from", {}) or {}
+    email_addr = (frm.get("emailAddress") or {}).get("address", "") if isinstance(frm, dict) else ""
+    return {
+        "ts": msg.get("receivedDateTime"),
+        "sender": email_addr,
+        "subject": msg.get("subject", ""),
+        "project": f"EMAIL/{mailbox_upn}",
+        "waiting_status": "neutral",
+        "uid": uid,
+        "graph_message_id": msg.get("id"),
+        "mailbox": mailbox_upn,
+        "folder": folder,
+    }
+
+def main():
+    ensure_dirs()
+
+    tenant = os.environ["TCL_TENANT_ID"]
+    client_id = os.environ["TCL_CLIENT_ID"]
+    secret = os.environ["TCL_CLIENT_SECRET"]
+    mailbox_upn = os.environ["TEST_MAILBOX_UPN"]
+
+    # folders configurable via env: TCL_FOLDERS="Inbox,SentItems"
+    folders_env = os.environ.get("TCL_FOLDERS", "")
+    folders = [x.strip() for x in folders_env.split(",") if x.strip()] if folders_env else DEFAULT_FOLDERS
+
+    token = get_token(tenant, client_id, secret)
+    headers = {"Authorization": f"Bearer {token}"}
+
+    st = load_json(STATE_FILE, default={})
+    msg_map = load_json(MSG_MAP_FILE, default={"next_uid": 1, "seen": {}})
+
+    # MIGRATION: if older version stored st["delta_link"], move it to Inbox
+    if "delta_link" in st and "delta_links" not in st:
+        st["delta_links"] = {"Inbox": st["delta_link"]}
+        st.pop("delta_link", None)
+
+    if "delta_links" not in st:
+        st["delta_links"] = {}
+
+    all_new_events = []
+    pages_total = 0
+    updated_any_delta = False
+
+    for folder in folders:
+        delta_link = st["delta_links"].get(folder)
+
+        if delta_link:
+            url = delta_link
+            params = None
+        else:
+            # Use well-known folder names; avoids brittle AQMk IDs
+            url = f"{GRAPH}/users/{mailbox_upn}/mailFolders('{folder}')/messages/delta"
+            params = {
+                "$select": "id,subject,receivedDateTime,from",
+                "$top": "50",
+            }
+
+        pages = 0
+
+        while True:
+            pages += 1
+            pages_total += 1
+
+            data = graph_get(url, headers, params=params)
+
+            for msg in data.get("value", []):
+                mid = msg.get("id")
+                if not mid:
+                    continue
+                if mid in msg_map["seen"]:
+                    continue
+
+                uid = int(msg_map["next_uid"])
+                msg_map["next_uid"] = uid + 1
+                msg_map["seen"][mid] = uid
+                all_new_events.append(make_event(msg, mailbox_upn, uid, folder))
+
+            next_link = data.get("@odata.nextLink")
+            if next_link:
+                url = next_link
+                params = None
+                continue
+
+            new_delta = data.get("@odata.deltaLink")
+            if new_delta:
+                st["delta_links"][folder] = new_delta
+                updated_any_delta = True
+
+            break
+
+    if updated_any_delta:
+        st["updated_utc"] = utc_now_z()
+
+    save_json(STATE_FILE, st)
+    save_json(MSG_MAP_FILE, msg_map)
+
+    if not all_new_events:
+        print(f"{utc_now_z()} no new messages (pages={pages_total})")
+        return
+
+    stamp = datetime.now(timezone.utc).strftime("%Y%m%d_%H%M%S")
+    fname = f"email_poll_{mailbox_upn.replace('@','_at_')}_{stamp}_{uuid.uuid4().hex[:8]}.jsonl"
+    out_path = os.path.join(INBOX_DROP, fname)
+
+    with open(out_path, "w") as f:
+        for e in all_new_events:
+            f.write(json.dumps(e, ensure_ascii=False) + "\n")
+
+    print(f"{utc_now_z()} wrote {len(all_new_events)} events -> inbox_drop/{fname}")
+
+if __name__ == "__main__":
+    main()

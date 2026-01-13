@@ -1,0 +1,49 @@
+{
+  "generated_at": "2025-12-16T20:20:02.752214Z",
+  "wrote": [
+    {
+      "type": "header",
+      "field": "estimator",
+      "cell": "T5",
+      "value": "RNC"
+    },
+    {
+      "type": "subs",
+      "trade": "ELECTRICAL",
+      "cell": "H16000",
+      "amount": 105097.0
+    },
+    {
+      "type": "subs",
+      "trade": "MECHANICAL",
+      "cell": "H15000",
+      "amount": 0.0
+    }
+  ],
+  "warnings": [
+    {
+      "warn": "header_write_blocked",
+      "field": "project_name",
+      "reason": "colored_protected:O3",
+      "target": "O3"
+    },
+    {
+      "warn": "header_write_blocked",
+      "field": "location_line1",
+      "reason": "colored_protected:O5",
+      "target": "O5"
+    },
+    {
+      "warn": "header_write_blocked",
+      "field": "location_line2",
+      "reason": "colored_protected:O6",
+      "target": "O6"
+    },
+    {
+      "warn": "header_write_blocked",
+      "field": "date",
+      "reason": "colored_protected:T3",
+      "target": "T3"
+    }
+  ]
+}

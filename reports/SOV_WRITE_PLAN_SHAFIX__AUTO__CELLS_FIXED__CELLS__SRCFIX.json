@@ -1,0 +1,134 @@
+{
+  "template": "/Volumes/TCL_DATA 1TB/TCL Partners Dropbox/Ryan Caton/TCL/TCL_SOV_TEMPLATE GBT.xlsm",
+  "lock": "/Users/tclserver/TCL_BRAIN/schema/TCL_SOV_TEMPLATE_GBT.lock.v1.json",
+  "writes": [
+    {
+      "sheet": "ESTIMATE (INPUT)",
+      "match": {
+        "trade": "General Conditions"
+      },
+      "write": {
+        "column": "AMOUNT",
+        "value": 5377.0
+      },
+      "meta": {
+        "source_path": "/Volumes/TCL_DATA 1TB/TCL Partners Dropbox/TCL Partners Dropbox/TCL_Server/_Estimates/Kite - Sierra Trading Lakewood/Sub Bids/Archer Construction.pdf",
+        "vendor": ""
+      },
+      "cell": "L26",
+      "source": {
+        "source_type": "unknown",
+        "source_path": "/Volumes/TCL_DATA 1TB/TCL Partners Dropbox/TCL Partners Dropbox/TCL_Server/_Estimates/Kite - Sierra Trading Lakewood/Sub Bids/Archer Construction.pdf",
+        "locator": "auto_patch",
+        "notes": ""
+      }
+    },
+    {
+      "sheet": "ESTIMATE (INPUT)",
+      "match": {
+        "trade": "Fire Protection"
+      },
+      "write": {
+        "column": "AMOUNT",
+        "value": 24715.0
+      },
+      "meta": {
+        "source_path": "/Volumes/TCL_DATA 1TB/TCL Partners Dropbox/TCL Partners Dropbox/TCL_Server/_Estimates/Kite - Sierra Trading Lakewood/Sub Bids/B&H Fire.pdf",
+        "vendor": ""
+      },
+      "cell": "L186",
+      "source": {
+        "source_type": "unknown",
+        "source_path": "/Volumes/TCL_DATA 1TB/TCL Partners Dropbox/TCL Partners Dropbox/TCL_Server/_Estimates/Kite - Sierra Trading Lakewood/Sub Bids/B&H Fire.pdf",
+        "locator": "auto_patch",
+        "notes": ""
+      }
+    },
+    {
+      "sheet": "ESTIMATE (INPUT)",
+      "match": {
+        "trade": "Refrigeration"
+      },
+      "write": {
+        "column": "AMOUNT",
+        "value": 3000000.0
+      },
+      "meta": {
+        "source_path": "/Volumes/TCL_DATA 1TB/TCL Partners Dropbox/TCL Partners Dropbox/TCL_Server/_Estimates/Kite - Sierra Trading Lakewood/Sub Bids/Evergreen Refer.pdf",
+        "vendor": ""
+      },
+      "cell": "L202",
+      "source": {
+        "source_type": "unknown",
+        "source_path": "/Volumes/TCL_DATA 1TB/TCL Partners Dropbox/TCL Partners Dropbox/TCL_Server/_Estimates/Kite - Sierra Trading Lakewood/Sub Bids/Evergreen Refer.pdf",
+        "locator": "auto_patch",
+        "notes": ""
+      }
+    },
+    {
+      "sheet": "ESTIMATE (INPUT)",
+      "match": {
+        "trade": "Material Handling"
+      },
+      "write": {
+        "column": "AMOUNT",
+        "value": 18068.0
+      },
+      "meta": {
+        "source_path": "/Volumes/TCL_DATA 1TB/TCL Partners Dropbox/TCL Partners Dropbox/TCL_Server/_Estimates/Kite - Sierra Trading Lakewood/Sub Bids/NW Handling.pdf",
+        "vendor": ""
+      },
+      "cell": "L178",
+      "source": {
+        "source_type": "unknown",
+        "source_path": "/Volumes/TCL_DATA 1TB/TCL Partners Dropbox/TCL Partners Dropbox/TCL_Server/_Estimates/Kite - Sierra Trading Lakewood/Sub Bids/NW Handling.pdf",
+        "locator": "auto_patch",
+        "notes": ""
+      }
+    },
+    {
+      "sheet": "ESTIMATE (INPUT)",
+      "match": {
+        "trade": "Electrical"
+      },
+      "write": {
+        "column": "AMOUNT",
+        "value": 105280.0
+      },
+      "meta": {
+        "source_path": "/Volumes/TCL_DATA 1TB/TCL Partners Dropbox/TCL Partners Dropbox/TCL_Server/_Estimates/Kite - Sierra Trading Lakewood/Sub Bids/Olsen Electric.pdf",
+        "vendor": ""
+      },
+      "cell": "L213",
+      "source": {
+        "source_type": "unknown",
+        "source_path": "/Volumes/TCL_DATA 1TB/TCL Partners Dropbox/TCL Partners Dropbox/TCL_Server/_Estimates/Kite - Sierra Trading Lakewood/Sub Bids/Olsen Electric.pdf",
+        "locator": "auto_patch",
+        "notes": ""
+      }
+    },
+    {
+      "sheet": "ESTIMATE (INPUT)",
+      "match": {
+        "trade": "Drywall / ACT"
+      },
+      "write": {
+        "column": "AMOUNT",
+        "value": 115598.0
+      },
+      "meta": {
+        "source_path": "/Volumes/TCL_DATA 1TB/TCL Partners Dropbox/TCL Partners Dropbox/TCL_Server/_Estimates/Kite - Sierra Trading Lakewood/Sub Bids/Olympic Interiors.pdf",
+        "vendor": ""
+      },
+      "cell": "L140",
+      "source": {
+        "source_type": "unknown",
+        "source_path": "/Volumes/TCL_DATA 1TB/TCL Partners Dropbox/TCL Partners Dropbox/TCL_Server/_Estimates/Kite - Sierra Trading Lakewood/Sub Bids/Olympic Interiors.pdf",
+        "locator": "auto_patch",
+        "notes": ""
+      }
+    }
+  ],
+  "plan_hash": "c37139c43d0714aaa546f22cff3fad4b45eb23a344e7138878acbe209a6e0bc7",
+  "template_sha256": "6f74e739c44964276e2103994a7a8983fd3c5f948f087a769f17e9139c052363"
+}

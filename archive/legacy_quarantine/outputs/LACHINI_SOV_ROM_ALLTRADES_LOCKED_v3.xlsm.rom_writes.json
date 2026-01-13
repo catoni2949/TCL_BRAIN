@@ -1,0 +1,247 @@
+{
+  "rom_writes": [
+    {
+      "code": 2090,
+      "row": 56,
+      "amount": 75000,
+      "desc": "DEMOLITION"
+    },
+    {
+      "code": 3000,
+      "row": 79,
+      "amount": 112000,
+      "desc": "CONCRETE"
+    },
+    {
+      "code": 5100,
+      "row": 81,
+      "amount": 62000,
+      "desc": "STRUCTURAL STEEL"
+    },
+    {
+      "code": 5500,
+      "row": 82,
+      "amount": 50000,
+      "desc": "METAL FABRICATIONS"
+    },
+    {
+      "code": 6200,
+      "row": 92,
+      "amount": 150000,
+      "desc": "FINISH CARPENTRY"
+    },
+    {
+      "code": 6300,
+      "row": 93,
+      "amount": 188000,
+      "desc": "MILLWORK & TRIM"
+    },
+    {
+      "code": 6400,
+      "row": 94,
+      "amount": 200000,
+      "desc": "CASEWORK - MARBLE TOPS"
+    },
+    {
+      "code": 7100,
+      "row": 103,
+      "amount": 88000,
+      "desc": "WATERPROOFING"
+    },
+    {
+      "code": 7200,
+      "row": 104,
+      "amount": 44000,
+      "desc": "INSULATION ALLOWANCE"
+    },
+    {
+      "code": 7300,
+      "row": 105,
+      "amount": 88000,
+      "desc": "ROOFING"
+    },
+    {
+      "code": 7900,
+      "row": 106,
+      "amount": 25000,
+      "desc": "JOINT SEALERS / CAULKING"
+    },
+    {
+      "code": 8100,
+      "row": 115,
+      "amount": 88000,
+      "desc": "METAL DOORS & FRAMES"
+    },
+    {
+      "code": 8200,
+      "row": 116,
+      "amount": 50000,
+      "desc": "WOOD & PLASTIC DOORS"
+    },
+    {
+      "code": 8400,
+      "row": 117,
+      "amount": 69000,
+      "desc": "ENTRANCES & STOREFRONTS"
+    },
+    {
+      "code": 8600,
+      "row": 118,
+      "amount": 69000,
+      "desc": "WOOD & PLASTIC WINDOWS"
+    },
+    {
+      "code": 8700,
+      "row": 119,
+      "amount": 88000,
+      "desc": "FINISH HARDWARE"
+    },
+    {
+      "code": 8750,
+      "row": 120,
+      "amount": 88000,
+      "desc": "DOORS/JAMBS/HDW"
+    },
+    {
+      "code": 8800,
+      "row": 121,
+      "amount": 88000,
+      "desc": "GLAZING"
+    },
+    {
+      "code": 8850,
+      "row": 122,
+      "amount": 31000,
+      "desc": "RELITE"
+    },
+    {
+      "code": 9100,
+      "row": 131,
+      "amount": 162000,
+      "desc": "STEEL STUDS & GWB"
+    },
+    {
+      "code": 9250,
+      "row": 132,
+      "amount": 144000,
+      "desc": "DRYWALL - GYPSUM BOARD"
+    },
+    {
+      "code": 9300,
+      "row": 133,
+      "amount": 112000,
+      "desc": "STONE VENEER FEATURE WALL ALLOWANCE"
+    },
+    {
+      "code": 9500,
+      "row": 142,
+      "amount": 81000,
+      "desc": "ACOUSTICAL CEILINGS"
+    },
+    {
+      "code": 9600,
+      "row": 151,
+      "amount": 125000,
+      "desc": "FLOORING"
+    },
+    {
+      "code": 9900,
+      "row": 160,
+      "amount": 62000,
+      "desc": "PAINT - INTERIOR"
+    },
+    {
+      "code": 9950,
+      "row": 163,
+      "amount": 31000,
+      "desc": "WALL COVERINGS"
+    },
+    {
+      "code": 10500,
+      "row": 169,
+      "amount": 31000,
+      "desc": "TOILET PARTITIONS"
+    },
+    {
+      "code": 10800,
+      "row": 170,
+      "amount": 31000,
+      "desc": "TOILET & BATH ACCESSORIES"
+    },
+    {
+      "code": 11000,
+      "row": 178,
+      "amount": 50000,
+      "desc": "EQUIPMENT"
+    },
+    {
+      "code": 15300,
+      "row": 186,
+      "amount": 50000,
+      "desc": "FIRE PROTECTION"
+    },
+    {
+      "code": 15400,
+      "row": 194,
+      "amount": 100000,
+      "desc": "PLUMBING"
+    },
+    {
+      "code": 16400,
+      "row": 218,
+      "amount": 31000,
+      "desc": "CARD ACCESS SYSTEM"
+    },
+    {
+      "code": 16500,
+      "row": 211,
+      "amount": 50000,
+      "desc": "LIGHTING"
+    },
+    {
+      "code": 16700,
+      "row": 212,
+      "amount": 31000,
+      "desc": "COMMUNICATIONS / DATA"
+    },
+    {
+      "code": 16900,
+      "row": 220,
+      "amount": 31000,
+      "desc": "LOW VOLTAGE PATHWAYS ALLOWANCE"
+    },
+    {
+      "code": 16950,
+      "row": 221,
+      "amount": 31000,
+      "desc": "FIRE ALARM + PERMIT"
+    }
+  ],
+  "override_writes": [
+    {
+      "code": 15500,
+      "row": 202,
+      "amount": 99782,
+      "desc": "HVAC / HOOD / MAU / EF"
+    },
+    {
+      "code": 16000,
+      "row": 210,
+      "amount": 105097,
+      "desc": "ELECTRICAL BASE (NO FA)"
+    }
+  ],
+  "skipped": [],
+  "meta": {
+    "template": "./inputs/TCL_SOV_TEMPLATE GBT.xlsm",
+    "output": "outputs/LACHINI_SOV_ROM_ALLTRADES_LOCKED_v3.xlsm",
+    "header_row": 11,
+    "code_col": 1,
+    "desc_col_used": 2,
+    "unit_col": 5,
+    "subs_col": 9,
+    "sf": 12500,
+    "date_touched": false,
+    "self_performed_locked": true
+  }
+}

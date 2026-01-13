@@ -1,0 +1,20 @@
+{
+  "meta": {
+    "project_name": "LACHINI VINEYARDS TASTING ROOM",
+    "project_location_line1": "",
+    "project_location_line2": "",
+    "estimator": "RNC"
+  },
+  "cells": {
+    "project_name": "O3",
+    "location_line1": "O5",
+    "location_line2": "O6",
+    "date": "T3",
+    "estimator": "T5"
+  },
+  "subs_column": "H",
+  "hard_map": {
+    "ELECTRICAL": { "row": 16000, "amount": 105097.00 },
+    "MECHANICAL": { "row": 15000, "amount": 0.00 }
+  }
+}

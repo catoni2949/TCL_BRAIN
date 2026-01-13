@@ -1,0 +1,40 @@
+{
+  "wrote": [
+    {
+      "code": 15500,
+      "row": 202,
+      "col": "SUBS",
+      "amount": 99782.0,
+      "desc": "HVAC / HOOD / MAU / EF"
+    },
+    {
+      "code": 16000,
+      "row": 210,
+      "col": "SUBS",
+      "amount": 105097.0,
+      "desc": "ELECTRICAL BASE (NO FA)"
+    },
+    {
+      "code": 15300,
+      "row": 186,
+      "col": "SUBS",
+      "amount": 0.0,
+      "desc": "FIRE PROTECTION"
+    },
+    {
+      "code": 15400,
+      "row": 194,
+      "col": "SUBS",
+      "amount": 150000.0,
+      "desc": "PLUMBING"
+    },
+    {
+      "code": 9100,
+      "row": 131,
+      "col": "SUBS",
+      "amount": 0.0,
+      "desc": "STEEL STUDS & GWB"
+    }
+  ],
+  "warnings": []
+}

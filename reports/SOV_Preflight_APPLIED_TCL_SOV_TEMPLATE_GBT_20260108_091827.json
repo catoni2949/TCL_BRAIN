@@ -1,0 +1,101 @@
+{
+  "status": "GO",
+  "timestamp": "2026-01-08 09:19:18",
+  "running_file": "/Users/tclserver/TCL_BRAIN/sov_preflight_validator.py",
+  "argv": [
+    "/Users/tclserver/TCL_BRAIN/sov_preflight_validator.py",
+    "--template",
+    "/Users/tclserver/TCL_BRAIN/reports/APPLIED_TCL_SOV_TEMPLATE_GBT_20260108_091827.xlsm",
+    "--out-dir",
+    "/Users/tclserver/TCL_BRAIN/reports"
+  ],
+  "template_path": "/Users/tclserver/TCL_BRAIN/reports/APPLIED_TCL_SOV_TEMPLATE_GBT_20260108_091827.xlsm",
+  "template_sha256": "58b6eec5a8cf12ee5e1dd86c92c771859a3323f0b5193cf98244af20e0dff76a",
+  "template_sheets": [
+    "ESTIMATE (INPUT)",
+    "ESTIMATE (output)",
+    "FOOTINGS",
+    "SOG",
+    "TOPPING SLAB"
+  ],
+  "total_codes_found": 195,
+  "unique_codes_found": 77,
+  "invalid_codes_total": 0,
+  "duplicates_total": 118,
+  "register_path": null,
+  "register_codes_count": 0,
+  "codes_missing_in_register": [],
+  "template_lock_path": null,
+  "template_lock_loaded": false,
+  "notes": [],
+  "per_sheet": [
+    {
+      "sheet": "ESTIMATE (INPUT)",
+      "code_headers": [
+        [
+          11,
+          1
+        ]
+      ],
+      "codes_found": 174,
+      "invalid_codes": [],
+      "duplicate_codes": [
+        "1000",
+        "10000",
+        "11000",
+        "15300",
+        "15400",
+        "15500",
+        "1600",
+        "16000",
+        "16500",
+        "16900",
+        "1700",
+        "2000",
+        "3000",
+        "5000",
+        "6100",
+        "7200",
+        "8700",
+        "8750",
+        "9250",
+        "9500",
+        "9600",
+        "9900"
+      ]
+    },
+    {
+      "sheet": "ESTIMATE (output)",
+      "code_headers": [
+        [
+          11,
+          1
+        ]
+      ],
+      "codes_found": 21,
+      "invalid_codes": [],
+      "duplicate_codes": []
+    },
+    {
+      "sheet": "FOOTINGS",
+      "code_headers": [],
+      "codes_found": 0,
+      "invalid_codes": [],
+      "duplicate_codes": []
+    },
+    {
+      "sheet": "SOG",
+      "code_headers": [],
+      "codes_found": 0,
+      "invalid_codes": [],
+      "duplicate_codes": []
+    },
+    {
+      "sheet": "TOPPING SLAB",
+      "code_headers": [],
+      "codes_found": 0,
+      "invalid_codes": [],
+      "duplicate_codes": []
+    }
+  ]
+}

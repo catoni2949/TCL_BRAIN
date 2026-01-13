@@ -1,0 +1,24 @@
+SOV PREFLIGHT VALIDATION REPORT (READ-ONLY)
+
+Timestamp: 2026-01-07 18:04:15
+Status: GO
+Running file: /Users/tclserver/TCL_BRAIN/sov_preflight_validator.py
+Template: /Volumes/TCL_DATA 1TB/TCL Partners Dropbox/Ryan Caton/TCL/TCL_SOV_TEMPLATE GBT.xlsm
+Template SHA256: 6f74e739c44964276e2103994a7a8983fd3c5f948f087a769f17e9139c052363
+Sheets: ESTIMATE (INPUT), ESTIMATE (output), FOOTINGS, SOG, TOPPING SLAB
+
+Codes found (total): 195
+Codes found (unique): 77
+Invalid codes: 0
+Duplicate count (approx): 118
+
+Code register: (not provided)
+
+Template lock: (not provided)
+
+Per-sheet scan summary:
+- ESTIMATE (INPUT): headers=1 codes=174 invalid=0 dups=22
+- ESTIMATE (output): headers=1 codes=21 invalid=0 dups=0
+- FOOTINGS: headers=0 codes=0 invalid=0 dups=0
+- SOG: headers=0 codes=0 invalid=0 dups=0
+- TOPPING SLAB: headers=0 codes=0 invalid=0 dups=0

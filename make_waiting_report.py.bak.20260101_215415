@@ -1,0 +1,212 @@
+#!/usr/bin/env python3
+import json
+import os
+from pathlib import Path
+from datetime import datetime, timezone, timedelta
+
+BASE = Path.home() / "TCL_BRAIN"
+FEED = BASE / "feeds" / "work_events_email.live.jsonl"
+REPORT = BASE / "reports" / "waiting_report.txt"
+ROUTES_FILE = BASE / "routing_rules.json"
+
+WINDOW_DAYS = 30
+STATUSES = {"neutral", "waiting_on_them", "waiting_on_us"}
+
+
+def utc_now():
+    return datetime.now(timezone.utc)
+
+
+def utc_now_z():
+    return utc_now().strftime("%Y-%m-%dT%H:%M:%SZ")
+
+
+def load_json(path: Path, default):
+    try:
+        return json.loads(path.read_text(encoding="utf-8"))
+    except Exception:
+        return default
+
+
+def parse_ts(ts: str):
+    # expected like 2026-01-02T05:30:42Z
+    try:
+        if ts.endswith("Z"):
+            ts = ts[:-1] + "+00:00"
+        return datetime.fromisoformat(ts)
+    except Exception:
+        return None
+
+
+def norm(s):
+    return (s or "").strip()
+
+
+def norm_lower(s):
+    return norm(s).lower()
+
+
+def contains_any(haystack: str, needles):
+    h = norm_lower(haystack)
+    for n in needles or []:
+        if norm_lower(n) and norm_lower(n) in h:
+            return True
+    return False
+
+
+def load_routes():
+    routes = load_json(ROUTES_FILE, {})
+    if not isinstance(routes, dict):
+        routes = {}
+    routes.setdefault("version", 1)
+    routes.setdefault("default_email_bucket", "EMAIL/Unrouted")
+    routes.setdefault("ignore", [])
+    routes.setdefault("rules", [])
+    return routes
+
+
+def match_rule(evt, rule):
+    sender = norm_lower(evt.get("sender", ""))
+    subject = norm_lower(evt.get("subject", ""))
+    folder = norm_lower(evt.get("folder", ""))
+    mailbox = norm_lower(evt.get("mailbox", ""))
+
+    # optional keys
+    sender_contains = rule.get("sender_contains", [])
+    subject_contains = rule.get("subject_contains", [])
+    folder_is = [norm_lower(x) for x in rule.get("folder_is", [])]
+    mailbox_is = [norm_lower(x) for x in rule.get("mailbox_is", [])]
+
+    # if specified, must match
+    if folder_is and folder not in folder_is:
+        return False
+    if mailbox_is and mailbox not in mailbox_is:
+        return False
+
+    # require at least one content match if present
+    content_match = False
+    if sender_contains:
+        content_match = content_match or contains_any(sender, sender_contains)
+    if subject_contains:
+        content_match = content_match or contains_any(subject, subject_contains)
+
+    # if neither list provided, treat as non-match (avoid accidental catch-alls)
+    if not sender_contains and not subject_contains:
+        return False
+
+    return content_match
+
+
+def should_ignore(evt, ignore_rules):
+    for r in ignore_rules or []:
+        if match_rule(evt, r):
+            return True
+    return False
+
+
+def routed_bucket(evt, routes):
+    """
+    Returns (bucket_name, ignored_bool).
+    Bucket is used for grouping in report.
+    """
+    if should_ignore(evt, routes.get("ignore", [])):
+        return (None, True)
+
+    for r in routes.get("rules", []):
+        if match_rule(evt, r):
+            bucket = norm(r.get("bucket")) or norm(r.get("project")) or ""
+            if bucket:
+                return (bucket, False)
+
+    return (routes.get("default_email_bucket", "EMAIL/Unrouted"), False)
+
+
+def load_events():
+    if not FEED.exists():
+        return []
+
+    events = []
+    with FEED.open("r", encoding="utf-8") as f:
+        for line in f:
+            line = line.strip()
+            if not line:
+                continue
+            try:
+                evt = json.loads(line)
+                if isinstance(evt, dict):
+                    events.append(evt)
+            except Exception:
+                continue
+    return events
+
+
+def main():
+    now = utc_now()
+    cutoff = now - timedelta(days=WINDOW_DAYS)
+    routes = load_routes()
+
+    events = load_events()
+
+    # Filter + bucket
+    bucketed = []
+    for e in events:
+        ts = parse_ts(norm(e.get("ts", "")))
+        if not ts or ts < cutoff:
+            continue
+
+        status = norm(e.get("waiting_status", "neutral")) or "neutral"
+        if status not in STATUSES:
+            continue
+
+        proj = norm(e.get("project", ""))
+
+# Keep any existing project (including EMAIL/...)
+# Only route if project is missing/blank.
+if not proj:
+    proj, _ = route_email_event(e, routes)  # <-- use your actual routing function name
+
+group = proj or "(no project)"
+
+        bucketed.append((group, ts, e.get("sender", ""), e.get("subject", ""), status))
+
+    # Sort newest first within each bucket
+    bucketed.sort(key=lambda x: x[1], reverse=True)
+
+    # Group
+    groups = {}
+    for g, ts, sender, subject, status in bucketed:
+        groups.setdefault(g, []).append((ts, sender, subject, status))
+
+    # Order groups: non-email named projects first, then EMAIL buckets, then (no project)
+    def group_sort_key(name):
+        if name == "(no project)":
+            return (2, name.lower())
+        if name.startswith("EMAIL/"):
+            return (1, name.lower())
+        return (0, name.lower())
+
+    ordered_group_names = sorted(groups.keys(), key=group_sort_key)
+
+    REPORT.parent.mkdir(parents=True, exist_ok=True)
+
+    lines = []
+    lines.append("TCL_BRAIN waiting report")
+    lines.append(f"Generated (UTC): {utc_now_z()}")
+    lines.append(f"Window: last {WINDOW_DAYS} days (cutoff={cutoff.isoformat()})")
+    lines.append("Statuses: " + ", ".join(sorted(STATUSES)))
+    lines.append(f"Events: {len(bucketed)}")
+    lines.append("")
+
+    for name in ordered_group_names:
+        items = groups[name]
+        lines.append(f"=== {name} ({len(items)}) ===")
+        for ts, sender, subject, status in items[:50]:
+            lines.append(f"- {ts.strftime('%Y-%m-%dT%H:%M:%SZ')} | {sender} | {subject} | {status}")
+        lines.append("")
+
+    REPORT.write_text("\n".join(lines).rstrip() + "\n", encoding="utf-8")
+    print(f"Wrote: {REPORT} ({len(lines)} lines)")
+
+
+if __name__ == "__main__":
+    main()

@@ -1,0 +1,64 @@
+PROJECT ARTIFACT DISCOVERY REPORT (LIVE)
+
+Project: C4WLS - St. Francis
+Timestamp: 2026-01-07 16:34:14
+Dropbox Root: /Volumes/TCL_DATA 1TB/TCL Partners Dropbox
+Mode: index everything; read-only
+
+1) PROJECT FINGERPRINT (RANKING ONLY)
+- Project tokens: C4WLS, Francis
+- Vendor tokens loaded: 0
+
+2) TOP CANDIDATE ARTIFACTS (by score)
+- score=12.0 type_hint=unknown  group=drawings     hits(project=2, option=1, vendor=0, context=0) :: /Volumes/TCL_DATA 1TB/TCL Partners Dropbox/Ryan Caton/ChatGBT/IN/BIDS/ST_FRANCIS_F2_OPT2/C4WLS_OPTION 2.pdf
+- score=12.0 type_hint=unknown  group=drawings     hits(project=2, option=1, vendor=0, context=0) :: /Volumes/TCL_DATA 1TB/TCL Partners Dropbox/Ryan Caton/ChatGBT/IN/BIDS/ST_FRANCIS_F2__OPT1/C4WLS_OPTION 1.pdf
+- score=12.0 type_hint=unknown  group=drawings     hits(project=2, option=1, vendor=0, context=0) :: /Volumes/TCL_DATA 1TB/TCL Partners Dropbox/Ryan Caton/ChatGBT/IN/BIDS/ST_FRANCIS_F2__OPT1/C4WLS_OPTION 2.pdf
+- score=12.0 type_hint=unknown  group=drawings     hits(project=2, option=1, vendor=0, context=0) :: /Volumes/TCL_DATA 1TB/TCL Partners Dropbox/Ryan Caton/ChatGBT/IN/BIDS/ST_FRANCIS_F2/C4WLS_OPTION 1.pdf
+- score=12.0 type_hint=unknown  group=drawings     hits(project=2, option=1, vendor=0, context=0) :: /Volumes/TCL_DATA 1TB/TCL Partners Dropbox/Ryan Caton/ChatGBT/IN/BIDS/ST_FRANCIS_F2/C4WLS_OPTION 2.pdf
+- score=12.0 type_hint=unknown  group=drawings     hits(project=2, option=1, vendor=0, context=0) :: /Volumes/TCL_DATA 1TB/TCL Partners Dropbox/Ryan Caton/ChatGBT/IN/BIDS/ST_FRANCIS_F2/OPT2/C4WLS_OPTION 2.pdf
+- score=12.0 type_hint=unknown  group=drawings     hits(project=2, option=1, vendor=0, context=0) :: /Volumes/TCL_DATA 1TB/TCL Partners Dropbox/Ryan Caton/ChatGBT/IN/BIDS/ST_FRANCIS_F2/OPT1/C4WLS_OPTION 1.pdf
+- score=12.0 type_hint=unknown  group=drawings     hits(project=2, option=1, vendor=0, context=0) :: /Volumes/TCL_DATA 1TB/TCL Partners Dropbox/Ryan Caton/ChatGBT/IN/BIDS/ST_FRANCIS_F2_OPT1/C4WLS_OPTION 1.pdf
+- score=12.0 type_hint=unknown  group=drawings     hits(project=2, option=1, vendor=0, context=0) :: /Volumes/TCL_DATA 1TB/TCL Partners Dropbox/Ryan Caton/ChatGBT/IN/BIDS/ST_FRANCIS_F2__OPT2/C4WLS_OPTION 1.pdf
+- score=12.0 type_hint=unknown  group=drawings     hits(project=2, option=1, vendor=0, context=0) :: /Volumes/TCL_DATA 1TB/TCL Partners Dropbox/Ryan Caton/ChatGBT/IN/BIDS/ST_FRANCIS_F2__OPT2/C4WLS_OPTION 2.pdf
+- score=12.0 type_hint=unknown  group=drawings     hits(project=2, option=1, vendor=0, context=0) :: /Volumes/TCL_DATA 1TB/TCL Partners Dropbox/TCL Partners Dropbox/TCL_Server/_Estimates/C4WLS  St. Francis/ROM Option 2.xls.pdf
+- score=12.0 type_hint=unknown  group=drawings     hits(project=2, option=1, vendor=0, context=0) :: /Volumes/TCL_DATA 1TB/TCL Partners Dropbox/TCL Partners Dropbox/TCL_Server/_Estimates/C4WLS  St. Francis/C4WLS_OPTION 1.pdf
+- score=12.0 type_hint=unknown  group=drawings     hits(project=2, option=1, vendor=0, context=0) :: /Volumes/TCL_DATA 1TB/TCL Partners Dropbox/TCL Partners Dropbox/TCL_Server/_Estimates/C4WLS  St. Francis/C4WLS_OPTION 2.pdf
+- score=12.0 type_hint=unknown  group=drawings     hits(project=2, option=1, vendor=0, context=0) :: /Volumes/TCL_DATA 1TB/TCL Partners Dropbox/TCL Partners Dropbox/TCL_Server/_Estimates/C4WLS  St. Francis/ROM Option 1.xls.pdf
+- score=12.0 type_hint=unknown  group=spreadsheets hits(project=2, option=1, vendor=0, context=0) :: /Volumes/TCL_DATA 1TB/TCL Partners Dropbox/TCL Partners Dropbox/TCL_Server/_Estimates/C4WLS  St. Francis/ROM Option 2.xls
+- score=12.0 type_hint=unknown  group=spreadsheets hits(project=2, option=1, vendor=0, context=0) :: /Volumes/TCL_DATA 1TB/TCL Partners Dropbox/TCL Partners Dropbox/TCL_Server/_Estimates/C4WLS  St. Francis/ROM Option 1.xls
+- score=12.0 type_hint=unknown  group=drawings     hits(project=2, option=1, vendor=0, context=0) :: /Volumes/TCL_DATA 1TB/TCL Partners Dropbox/TCL Partners Dropbox/TCL_Server/_Estimates/C4WLS  St. Francis/sub email/C4WLS_OPTION 1 (1).pdf
+- score=12.0 type_hint=unknown  group=drawings     hits(project=2, option=1, vendor=0, context=0) :: /Volumes/TCL_DATA 1TB/TCL Partners Dropbox/TCL Partners Dropbox/TCL_Server/_Estimates/C4WLS  St. Francis/sub email/C4WLS_OPTION 2 (1).pdf
+- score=12.0 type_hint=unknown  group=drawings     hits(project=2, option=1, vendor=0, context=0) :: /Volumes/TCL_DATA 1TB/TCL Partners Dropbox/TCL_Server/_Estimates/C4WLS  St. Francis/C4WLS_OPTION 1.pdf
+- score=12.0 type_hint=unknown  group=drawings     hits(project=2, option=1, vendor=0, context=0) :: /Volumes/TCL_DATA 1TB/TCL Partners Dropbox/TCL_Server/_Estimates/C4WLS  St. Francis/C4WLS_OPTION 2.pdf
+- score=10.5 type_hint=unknown  group=specs        hits(project=2, option=0, vendor=0, context=0) :: /Volumes/TCL_DATA 1TB/TCL Partners Dropbox/TCL Partners Dropbox/TCL_Server/_Estimates/C4WLS  St. Francis/Scope Details.docx
+- score=10.5 type_hint=unknown  group=other        hits(project=2, option=0, vendor=0, context=0) :: /Volumes/TCL_DATA 1TB/TCL Partners Dropbox/TCL Partners Dropbox/TCL_Server/_Estimates/C4WLS  St. Francis/.DS_Store
+- score=10.5 type_hint=unknown  group=drawings     hits(project=2, option=0, vendor=0, context=0) :: /Volumes/TCL_DATA 1TB/TCL Partners Dropbox/TCL Partners Dropbox/TCL_Server/_Estimates/C4WLS  St. Francis/Scope Details.pdf
+- score=10.5 type_hint=unknown  group=drawings     hits(project=2, option=0, vendor=0, context=0) :: /Volumes/TCL_DATA 1TB/TCL Partners Dropbox/TCL Partners Dropbox/TCL_Server/_Estimates/C4WLS  St. Francis/Scope Details & ROMs.pdf
+- score=10.5 type_hint=unknown  group=drawings     hits(project=2, option=0, vendor=0, context=0) :: /Volumes/TCL_DATA 1TB/TCL Partners Dropbox/TCL Partners Dropbox/TCL_Server/_Estimates/C4WLS  St. Francis/CWLS_Brooklake _SP.01.pdf
+- score=10.5 type_hint=unknown  group=drawings     hits(project=2, option=0, vendor=0, context=0) :: /Volumes/TCL_DATA 1TB/TCL Partners Dropbox/TCL Partners Dropbox/TCL_Server/_Estimates/C4WLS  St. Francis/St Francis_Fl.2-Floor Plan_EXISTING.pdf
+- score=10.5 type_hint=unknown  group=drawings     hits(project=2, option=0, vendor=0, context=0) :: /Volumes/TCL_DATA 1TB/TCL Partners Dropbox/TCL Partners Dropbox/TCL_Server/_Estimates/C4WLS  St. Francis/Sub Bids/Apex Flooring.pdf
+- score=10.5 type_hint=unknown  group=drawings     hits(project=2, option=0, vendor=0, context=0) :: /Volumes/TCL_DATA 1TB/TCL Partners Dropbox/TCL Partners Dropbox/TCL_Server/_Estimates/C4WLS  St. Francis/Sub Bids/UR.pdf
+- score=10.5 type_hint=unknown  group=drawings     hits(project=2, option=0, vendor=0, context=0) :: /Volumes/TCL_DATA 1TB/TCL Partners Dropbox/TCL Partners Dropbox/TCL_Server/_Estimates/C4WLS  St. Francis/Sub Bids/Pro Paint Solutions.pdf
+- score=10.5 type_hint=unknown  group=emails       hits(project=2, option=0, vendor=0, context=0) :: /Volumes/TCL_DATA 1TB/TCL Partners Dropbox/TCL Partners Dropbox/TCL_Server/_Estimates/C4WLS  St. Francis/Sub Bids/OLESEN.eml
+- score=10.5 type_hint=unknown  group=drawings     hits(project=2, option=0, vendor=0, context=0) :: /Volumes/TCL_DATA 1TB/TCL Partners Dropbox/TCL Partners Dropbox/TCL_Server/_Estimates/C4WLS  St. Francis/Sub Bids/Olympic.pdf
+- score=10.5 type_hint=unknown  group=drawings     hits(project=2, option=0, vendor=0, context=0) :: /Volumes/TCL_DATA 1TB/TCL Partners Dropbox/TCL Partners Dropbox/TCL_Server/_Estimates/C4WLS  St. Francis/Sub Bids/WW Wells.pdf
+- score=10.5 type_hint=unknown  group=drawings     hits(project=2, option=0, vendor=0, context=0) :: /Volumes/TCL_DATA 1TB/TCL Partners Dropbox/TCL Partners Dropbox/TCL_Server/_Estimates/C4WLS  St. Francis/sub email/St Francis_Fl.2-Floor Plan_EXISTING (1).pdf
+- score=10.5 type_hint=unknown  group=images       hits(project=2, option=0, vendor=0, context=0) :: /Volumes/TCL_DATA 1TB/TCL Partners Dropbox/TCL Partners Dropbox/TCL_Server/_Estimates/C4WLS  St. Francis/sub email/PHOTOS (1)/IMG_1274.jpeg
+- score=10.5 type_hint=unknown  group=images       hits(project=2, option=0, vendor=0, context=0) :: /Volumes/TCL_DATA 1TB/TCL Partners Dropbox/TCL Partners Dropbox/TCL_Server/_Estimates/C4WLS  St. Francis/sub email/PHOTOS (1)/IMG_6941.HEIC
+- score=10.5 type_hint=unknown  group=images       hits(project=2, option=0, vendor=0, context=0) :: /Volumes/TCL_DATA 1TB/TCL Partners Dropbox/TCL Partners Dropbox/TCL_Server/_Estimates/C4WLS  St. Francis/sub email/PHOTOS (1)/IMG_1278.jpeg
+- score=10.5 type_hint=unknown  group=images       hits(project=2, option=0, vendor=0, context=0) :: /Volumes/TCL_DATA 1TB/TCL Partners Dropbox/TCL Partners Dropbox/TCL_Server/_Estimates/C4WLS  St. Francis/sub email/PHOTOS (1)/IMG_6936.HEIC
+- score=10.5 type_hint=unknown  group=images       hits(project=2, option=0, vendor=0, context=0) :: /Volumes/TCL_DATA 1TB/TCL Partners Dropbox/TCL Partners Dropbox/TCL_Server/_Estimates/C4WLS  St. Francis/sub email/PHOTOS (1)/IMG_1281.jpeg
+- score=10.5 type_hint=unknown  group=images       hits(project=2, option=0, vendor=0, context=0) :: /Volumes/TCL_DATA 1TB/TCL Partners Dropbox/TCL Partners Dropbox/TCL_Server/_Estimates/C4WLS  St. Francis/sub email/PHOTOS (1)/IMG_1280.jpeg
+- score=10.5 type_hint=unknown  group=images       hits(project=2, option=0, vendor=0, context=0) :: /Volumes/TCL_DATA 1TB/TCL Partners Dropbox/TCL Partners Dropbox/TCL_Server/_Estimates/C4WLS  St. Francis/sub email/PHOTOS (1)/IMG_6937.HEIC
+
+3) GOVERNING SET PROOF (PRELIMINARY)
+Rule: no artifact can be treated as governing unless it passes proof checks.
+
+4) HISTORICAL CANDIDATES (PATTERN LIBRARY ONLY)
+- none detected in top candidates
+
+5) PROGRAM / OPERATIONAL CONTEXT (NON-GOVERNING)
+- none detected in top candidates
+
+6) NEXT AUTHORIZED STEP
+After you accept this report: REQUIRED TRADE determination + scope element extraction with citations.

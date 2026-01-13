@@ -1,0 +1,290 @@
+#!/usr/bin/env python3
+import argparse, json, re, subprocess, time, hashlib
+from pathlib import Path
+from typing import Optional, Tuple, Dict, Any, List
+
+from openpyxl import load_workbook
+from openpyxl.utils.cell import get_column_letter
+from openpyxl.cell.cell import Cell
+
+DEFAULT_LOCK = str(Path.home() / "TCL_BRAIN" / "schema" / "TCL_SOV_TEMPLATE_GBT.lock.v1.json")
+GOV_SHEET = "ESTIMATE (INPUT)"
+
+LABELS = {
+    "PROJECT": ["PROJECT"],
+    "JOB NO.": ["JOB NO", "JOB NO.", "JOB #", "JOB NUMBER"],
+    "LOCATION": ["LOCATION", "ADDRESS", "PROJECT ADDRESS", "SITE ADDRESS"],
+    "DATE": ["DATE"],
+    "ESTIMATOR": ["ESTIMATOR"],
+    "TOTAL SF": ["TOTAL SF", "TOTAL SF =", "TOTAL S.F.", "TOTAL SF="],
+    "COST/SF": ["COST/SF", "COST / SF", "COST/SF="],
+}
+
+ADDRESS_RE = re.compile(
+    r'(?im)\b(\d{1,6}\s+[A-Z0-9][A-Z0-9\s\.\-#]{3,60}\b(?:ST|STREET|AVE|AVENUE|RD|ROAD|BLVD|BOULEVARD|DR|DRIVE|LN|LANE|WAY|HWY|HIGHWAY|CT|COURT|PL|PLACE)\b[^\n,]{0,40}(?:,\s*[A-Z][A-Z\s\.]{1,25})?(?:,\s*[A-Z]{2}\s*\d{5}(?:-\d{4})?)?)'
+)
+
+def safe_out_path(out_dir: Path, stem: str, tag: str) -> Path:
+    base = stem[:40]
+    h = hex(abs(hash(stem)))[2:10]
+    ts = time.strftime("%Y%m%d_%H%M%S")
+    return out_dir / f"{base}__{tag}_{ts}_{h}.json"
+
+def sha256_file(p: Path) -> str:
+    h = hashlib.sha256()
+    with p.open("rb") as f:
+        for ch in iter(lambda: f.read(1024*1024), b""):
+            h.update(ch)
+    return h.hexdigest()
+
+def load_plan(plan_path: Path) -> Dict[str, Any]:
+    return json.loads(plan_path.read_text(encoding="utf-8"))
+
+def load_lock(lock_path: Path) -> Dict[str, Any]:
+    return json.loads(lock_path.read_text(encoding="utf-8"))
+
+def plan_sources(plan: Dict[str, Any]) -> List[str]:
+    out = []
+    for w in plan.get("writes", []):
+        s = (w.get("source") or {}).get("source_path") or (w.get("source") or {}).get("path")
+        if s and isinstance(s, str) and s.lower().endswith(".pdf"):
+            out.append(s)
+    # de-dupe, preserve order
+    seen = set()
+    uniq = []
+    for s in out:
+        if s in seen:
+            continue
+        seen.add(s)
+        uniq.append(s)
+    return uniq
+
+def sniff_address_from_pdfs(plan: Dict[str, Any], max_pdfs: int = 8) -> Optional[str]:
+    pdfs = plan_sources(plan)[:max_pdfs]
+    for pdf in pdfs:
+        try:
+            # First page only
+            r = subprocess.run(
+                ["pdftotext", "-f", "1", "-l", "1", pdf, "-"],
+                stdout=subprocess.PIPE,
+                stderr=subprocess.DEVNULL,
+                text=True,
+                timeout=10,
+            )
+            txt = (r.stdout or "").strip()
+            if not txt:
+                continue
+            m = ADDRESS_RE.search(txt)
+            if m:
+                addr = re.sub(r"\s+", " ", m.group(1)).strip()
+                # avoid junk
+                if len(addr) >= 10 and any(ch.isdigit() for ch in addr):
+                    return addr
+        except Exception:
+            continue
+    return None
+
+def find_label_cells(ws, max_rows=25, max_cols=40) -> Dict[str, Cell]:
+    found: Dict[str, Cell] = {}
+    for r in range(1, max_rows + 1):
+        for c in range(1, max_cols + 1):
+            v = ws.cell(r, c).value
+            if not isinstance(v, str):
+                continue
+            s = v.strip().upper()
+            if not s:
+                continue
+            for key, variants in LABELS.items():
+                if key in found:
+                    continue
+                for vv in variants:
+                    if vv in s:
+                        found[key] = ws.cell(r, c)
+                        break
+    return found
+
+def merged_top_left(ws, r: int, c: int) -> Tuple[int, int]:
+    # If cell is in a merged range, return top-left; else return itself.
+    coord = ws.cell(r, c).coordinate
+    for rng in ws.merged_cells.ranges:
+        if coord in rng:
+            return rng.min_row, rng.min_col
+    return r, c
+
+def build_default_source_meta(plan: Dict[str, Any]) -> Tuple[Dict[str, Any], Dict[str, Any]]:
+    # Choose first existing write’s source/meta as defaults
+    writes = plan.get("writes", [])
+    for w in writes:
+        src = w.get("source")
+        meta = w.get("meta")
+        if isinstance(src, dict) and isinstance(meta, dict):
+            return src, meta
+    # fallback minimal
+    return (
+        {"source_type": "pdf", "source_path": "", "locator": "pages:1-1", "notes": "auto_resolve_default"},
+        {"project": "", "option": "", "trade": "HEADER", "bucket_code": "HEADER", "line_id": "HEADER:AUTO"},
+    )
+
+def add_or_replace_write(plan: Dict[str, Any], sheet: str, cell: str, value: Any,
+                         source: Dict[str, Any], meta: Dict[str, Any], line_id: str):
+    if value is None:
+        return
+    if isinstance(value, str) and value.strip() == "":
+        return
+    # Replace existing write to same cell if present
+    writes = plan.setdefault("writes", [])
+    for w in writes:
+        if w.get("sheet") == sheet and w.get("cell") == cell:
+            w["value"] = value
+            w["source"] = source
+            w["meta"] = meta
+            return
+    writes.append({
+        "sheet": sheet,
+        "cell": cell,
+        "value": value,
+        "source": source,
+        "meta": meta,
+    })
+
+def header_value_map(args, plan: Dict[str, Any]) -> Dict[str, Any]:
+    # Estimator hard override
+    vals: Dict[str, Any] = {}
+    if args.project: vals["PROJECT"] = args.project
+    if args.job_no: vals["JOB NO."] = args.job_no
+    if args.date: vals["DATE"] = args.date
+    # estimator ALWAYS RNC
+    vals["ESTIMATOR"] = "RNC"
+
+    # Location: prefer explicit arg, else sniff
+    loc = args.location
+    if not loc:
+        sniff = sniff_address_from_pdfs(plan)
+        if sniff:
+            loc = sniff
+    else:
+        # If they passed a short name like "St. Francis", but we can sniff a real address, prefer address.
+        sniff = sniff_address_from_pdfs(plan)
+        if sniff and any(ch.isdigit() for ch in sniff):
+            loc = sniff
+    if loc:
+        vals["LOCATION"] = loc
+
+    if args.total_sf is not None: vals["TOTAL SF"] = args.total_sf
+    if args.cost_sf is not None: vals["COST/SF"] = args.cost_sf
+    return vals
+
+def resolve_header_writes(ws, plan: Dict[str, Any], vals: Dict[str, Any]):
+    found = find_label_cells(ws)
+    default_source, default_meta0 = build_default_source_meta(plan)
+
+    # default meta for header writes
+    project_name = None
+    # Try to reuse a real project name from existing writes meta
+    for w in plan.get("writes", []):
+        m = w.get("meta") or {}
+        if isinstance(m, dict) and m.get("project"):
+            project_name = m["project"]
+            break
+
+    def meta_for(label_key: str) -> Dict[str, Any]:
+        m = dict(default_meta0)
+        m["trade"] = "HEADER"
+        m["bucket_code"] = "HEADER"
+        m["line_id"] = f"HEADER:{label_key}"
+        if project_name and not m.get("project"):
+            m["project"] = project_name
+        return m
+
+    # For each label we can find, write to the cell immediately to the right
+    for key, v in vals.items():
+        if key not in found:
+            continue
+        lbl_cell = found[key]
+        tr, tc = lbl_cell.row, lbl_cell.column + 1
+        tr, tc = merged_top_left(ws, tr, tc)
+        tgt = ws.cell(tr, tc).coordinate
+        add_or_replace_write(plan, GOV_SHEET, tgt, v, default_source, meta_for(key), f"HEADER:{key}")
+
+
+def purge_non_header_collisions(plan, protected_cells):
+    """
+    If any non-HEADER write targets a protected header cell, drop it.
+    This prevents quote/trade writes from overwriting PROJECT/DATE/ESTIMATOR/etc.
+    """
+    out = []
+    dropped = 0
+    for w in plan.get("writes", []):
+        cell = (w.get("cell") or "").strip().upper()
+        meta = w.get("meta") or {}
+        trade = (meta.get("trade") or "").strip().upper()
+        bucket = (meta.get("bucket_code") or "").strip().upper()
+        is_header = (trade == "HEADER") or (bucket == "HEADER")
+        if cell in protected_cells and not is_header:
+            dropped += 1
+            continue
+        out.append(w)
+    plan["writes"] = out
+    return dropped
+
+def main():
+    ap = argparse.ArgumentParser(description="Auto-resolve SOV header cells + trade cells (merged-safe, estimator=RNC, address sniff).")
+    ap.add_argument("--plan", required=True)
+    ap.add_argument("--template", required=True)
+    ap.add_argument("--out-dir", required=True)
+    ap.add_argument("--lock", default=DEFAULT_LOCK)
+
+    # optional header values
+    ap.add_argument("--project", default="")
+    ap.add_argument("--job-no", default="")
+    ap.add_argument("--location", default="")
+    ap.add_argument("--date", default="")
+    ap.add_argument("--total-sf", default=None)
+    ap.add_argument("--cost-sf", default=None)
+
+    args = ap.parse_args()
+
+    plan_path = Path(args.plan).expanduser().resolve()
+    tpl_path  = Path(args.template).expanduser().resolve()
+    out_dir   = Path(args.out_dir).expanduser().resolve()
+    lock_path = Path(args.lock).expanduser().resolve()
+
+    plan = load_plan(plan_path)
+    lock = load_lock(lock_path)
+
+    # ensure template_sha256 in plan (validator needs it sometimes)
+    if lock.get("template_sha256"):
+        plan["template_sha256"] = lock["template_sha256"]
+    else:
+        # compute and persist in plan if lock missing it
+        plan["template_sha256"] = sha256_file(tpl_path)
+
+    wb = load_workbook(str(tpl_path), data_only=True, keep_vba=True)
+    ws = wb[GOV_SHEET]
+
+    vals = header_value_map(args, plan)
+    resolve_header_writes(ws, plan, vals)
+
+    out_dir.mkdir(parents=True, exist_ok=True)
+    out = safe_out_path(out_dir, plan_path.stem, "AUTO")
+    # Protect header cells from being overwritten by non-HEADER writes
+    protected = {
+        # true header cells
+        "O2","O3","O4",   # project / job / location
+        "T2","T3",        # date / estimator
+        "H4","H6",        # total sf / cost sf
+
+        # cells we *never* want quote/trade writes to touch (historical redirect spillover)
+        "O7","U3"
+    }
+    dropped = purge_non_header_collisions(plan, protected)
+(plan, protected)
+    out.write_text(json.dumps(plan, indent=2), encoding="utf-8")
+
+    print("OK")
+    print("OUT_PLAN:", str(out))
+    # quick visibility
+    print("HEADER_VALS:", {k: vals.get(k) for k in ["PROJECT","JOB NO.","LOCATION","DATE","ESTIMATOR","TOTAL SF","COST/SF"]})
+
+if __name__ == "__main__":
+    main()

@@ -1,0 +1,38 @@
+{
+  "template": "/Volumes/TCL_DATA 1TB/TCL Partners Dropbox/Ryan Caton/TCL/TCL_SOV_TEMPLATE GBT.xlsm",
+  "lock": "/Users/tclserver/TCL_BRAIN/schema/TCL_SOV_TEMPLATE_GBT.lock.v1.json",
+  "writes": [
+    {
+      "sheet": "ESTIMATE (INPUT)",
+      "match": {
+        "trade": "Concrete"
+      },
+      "write": {
+        "column": "AMOUNT",
+        "value": 3295.0
+      },
+      "meta": {
+        "source_path": "/Volumes/TCL_DATA 1TB/TCL Partners Dropbox/TCL Partners Dropbox/TCL_Server/_Estimates/C4WLS  St. Francis/Sub Bids/UR.pdf",
+        "vendor": "ARH Inc"
+      }
+    },
+    {
+      "sheet": "ESTIMATE (INPUT)",
+      "match": {
+        "trade": "Millwork"
+      },
+      "write": {
+        "column": "AMOUNT",
+        "value": 52443.0
+      },
+      "meta": {
+        "source_path": "/Volumes/TCL_DATA 1TB/TCL Partners Dropbox/TCL Partners Dropbox/TCL_Server/_Estimates/C4WLS  St. Francis/Sub Bids/WW Wells.pdf",
+        "vendor": "W.W. Wells"
+      }
+    }
+  ],
+  "meta": {
+    "project": "Kite - Sierra Trading Lakewood",
+    "root": "/Volumes/TCL_DATA 1TB/TCL Partners Dropbox/TCL Partners Dropbox/TCL_Server/_Estimates/Kite - Sierra Trading Lakewood"
+  }
+}

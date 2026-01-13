@@ -1,0 +1,151 @@
+#!/usr/bin/env python3
+"""
+SOV Locked Writer (ENFORCES TEMPLATE LOCK)
+
+- Loads a template lock JSON (authoritative write policy)
+- Provides write_cell() that hard-blocks any illegal write
+- Logs every permitted write to JSONL audit log
+- NEVER guesses values; just enforces where/how a value may be written
+
+This is the gate that prevents:
+- overwriting formulas
+- writing to wrong sheet
+- template drift / corruption
+- silent hallucinations
+"""
+
+import json, os, time, hashlib
+from dataclasses import dataclass
+from typing import Any, Dict, Optional
+
+import openpyxl
+from openpyxl.utils.cell import coordinate_from_string, column_index_from_string
+from openpyxl.utils import get_column_letter
+
+def sha256_file(path: str, chunk_size: int = 1024 * 1024) -> str:
+    h = hashlib.sha256()
+    with open(path, "rb") as f:
+        while True:
+            b = f.read(chunk_size)
+            if not b:
+                break
+            h.update(b)
+    return h.hexdigest()
+
+def now_ts() -> str:
+    return time.strftime("%Y-%m-%d %H:%M:%S")
+
+def is_merged_cell(ws, row:int, col:int) -> bool:
+    for rng in ws.merged_cells.ranges:
+        if rng.min_row <= row <= rng.max_row and rng.min_col <= col <= rng.max_col:
+            return True
+    return False
+
+@dataclass
+class SourceRef:
+    source_type: str              # "bid_pdf" | "email_quote" | "allowance"
+    source_path: str              # file path (or message id)
+    locator: str                  # "p3" / "line 120-140" / "email 2026-01-05 14:22" etc.
+    notes: str = ""               # optional
+
+class LockedSOVWriter:
+    def __init__(self, template_path: str, lock_path: str, audit_log_path: str):
+        self.template_path = os.path.abspath(os.path.expanduser(template_path))
+        self.lock_path = os.path.abspath(os.path.expanduser(lock_path))
+        self.audit_log_path = os.path.abspath(os.path.expanduser(audit_log_path))
+
+        if not os.path.exists(self.template_path):
+            raise FileNotFoundError(f"template not found: {self.template_path}")
+        if not os.path.exists(self.lock_path):
+            raise FileNotFoundError(f"lock not found: {self.lock_path}")
+
+        self.template_sha = sha256_file(self.template_path)
+        self.lock = json.loads(open(self.lock_path, "r", encoding="utf-8").read())
+
+        lock_sha = self.lock.get("template", {}).get("sha256")
+        if lock_sha and lock_sha != self.template_sha:
+            raise RuntimeError(
+                f"TEMPLATE SHA MISMATCH:\n"
+                f"- template: {self.template_sha}\n"
+                f"- lock:     {lock_sha}\n"
+                f"Refusing to write."
+            )
+
+        self.gov_sheet = self.lock["governing"]["sheet"]
+        self.allowed_cols = set(self.lock["write_policy"]["allowed_columns"])
+        self.denied_cols = set(self.lock["write_policy"]["denied_columns"])
+        span = self.lock["governing"]["code_rows"]["span"]
+        self.row_min = int(span["first"])
+        self.row_max = int(span["last"])
+
+        # open workbook (keep formulas)
+        self.wb = openpyxl.load_workbook(self.template_path, data_only=False, keep_vba=True)
+        if self.gov_sheet not in self.wb.sheetnames:
+            raise RuntimeError(f"governing sheet missing: {self.gov_sheet}")
+        self.ws = self.wb[self.gov_sheet]
+
+        # ensure audit dir exists
+        os.makedirs(os.path.dirname(self.audit_log_path), exist_ok=True)
+
+    def _assert_write_allowed(self, sheet: str, cell_addr: str):
+        if sheet != self.gov_sheet:
+            raise PermissionError(f"WRITE BLOCKED: sheet '{sheet}' is not governing sheet '{self.gov_sheet}'")
+
+        col_letter, row = coordinate_from_string(cell_addr)
+        row = int(row)
+        if row < self.row_min or row > self.row_max:
+            raise PermissionError(f"WRITE BLOCKED: row {row} outside code row span {self.row_min}-{self.row_max}")
+
+        if col_letter in self.denied_cols:
+            raise PermissionError(f"WRITE BLOCKED: column {col_letter} is LOCKED by template lock")
+
+        if col_letter not in self.allowed_cols:
+            raise PermissionError(f"WRITE BLOCKED: column {col_letter} not in allowed write columns")
+
+        c = column_index_from_string(col_letter)
+        if is_merged_cell(self.ws, row, c):
+            raise PermissionError(f"WRITE BLOCKED: cell {cell_addr} is merged")
+
+        cur = self.ws[cell_addr].value
+        if isinstance(cur, str) and cur.strip().startswith("="):
+            raise PermissionError(f"WRITE BLOCKED: cell {cell_addr} contains a formula")
+
+        return cur
+
+    def write_cell(self,
+                   cell_addr: str,
+                   new_value: Any,
+                   source: SourceRef,
+                   meta: Optional[Dict[str, Any]] = None):
+        # hard gate
+        old_value = self._assert_write_allowed(self.gov_sheet, cell_addr)
+
+        # perform write
+        self.ws[cell_addr].value = new_value
+
+        # audit log
+        event = {
+            "ts": now_ts(),
+            "template_path": self.template_path,
+            "template_sha256": self.template_sha,
+            "lock_path": self.lock_path,
+            "sheet": self.gov_sheet,
+            "cell": cell_addr,
+            "old_value": old_value,
+            "new_value": new_value,
+            "source": {
+                "type": source.source_type,
+                "path": source.source_path,
+                "locator": source.locator,
+                "notes": source.notes,
+            },
+            "meta": meta or {}
+        }
+        with open(self.audit_log_path, "a", encoding="utf-8") as f:
+            f.write(json.dumps(event) + "\n")
+
+    def save_as(self, out_path: str):
+        out_path = os.path.abspath(os.path.expanduser(out_path))
+        os.makedirs(os.path.dirname(out_path), exist_ok=True)
+        self.wb.save(out_path)
+

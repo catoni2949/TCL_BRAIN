@@ -1,0 +1,40 @@
+{
+  "header_cells": {
+    "project_cell": "O2",
+    "location_cell": "O4",
+    "city_cell": "O5",
+    "date_cell": "T2",
+    "estimator_cell": "T3"
+  },
+  "rom_writes": [],
+  "override_writes": [
+    {
+      "code": 15500,
+      "row": 202,
+      "col": 9,
+      "amount": 99782,
+      "desc": "HVAC / HOOD / MAU / EF",
+      "self_performed": false
+    },
+    {
+      "code": 16000,
+      "row": 210,
+      "col": 9,
+      "amount": 105097,
+      "desc": "ELECTRICAL BASE (NO FA)",
+      "self_performed": false
+    }
+  ],
+  "self_performed_codes": [
+    1000,
+    1600,
+    1700,
+    1710,
+    1711,
+    1715,
+    1730,
+    1750,
+    1760,
+    6100
+  ]
+}
