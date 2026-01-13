@@ -9,3 +9,7 @@ tmp/
 
 # runtime report output
 reports/waiting_report.txt
+
+# === runtime / live state ===
+feeds/work_events_email.live.jsonl
+archive/drop_processed/
