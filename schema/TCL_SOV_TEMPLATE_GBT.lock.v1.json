@@ -1,16 +1,10 @@
 {
-  "lock_version": "v1",
   "created_ts": "2026-01-07 18:08:27",
-  "template": {
-    "path": "/Volumes/TCL_DATA 1TB/TCL Partners Dropbox/Ryan Caton/TCL/TCL_SOV_TEMPLATE GBT.xlsm",
-    "sha256": "6f74e739c44964276e2103994a7a8983fd3c5f948f087a769f17e9139c052363"
-  },
   "governing": {
-    "sheet": "ESTIMATE (INPUT)",
     "code_header": {
-      "row": 11,
       "col": 1,
-      "col_letter": "A"
+      "col_letter": "A",
+      "row": 11
     },
     "code_rows": {
       "count": 174,
@@ -18,8 +12,18 @@
         "first": 13,
         "last": 228
       }
-    }
+    },
+    "sheet": "ESTIMATE (INPUT)"
   },
+  "lock_version": "v1",
+  "protected_formula_cells": [
+    "H6"
+  ],
+  "template": {
+    "path": "/Volumes/TCL_DATA 1TB/TCL Partners Dropbox/Ryan Caton/TCL/TCL_SOV_TEMPLATE GBT.xlsm",
+    "sha256": "6f74e739c44964276e2103994a7a8983fd3c5f948f087a769f17e9139c052363"
+  },
+  "template_sha256": "6f74e739c44964276e2103994a7a8983fd3c5f948f087a769f17e9139c052363",
   "write_policy": {
     "allowed_columns": [
       "A",
@@ -85,6 +89,5 @@
       "NEVER overwrite a formula cell",
       "NEVER write to subtotal/total/header regions (enforced by code-row + allowed column gating)"
     ]
-  },
-  "template_sha256": "6f74e739c44964276e2103994a7a8983fd3c5f948f087a769f17e9139c052363"
+  }
 }
