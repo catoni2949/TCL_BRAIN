@@ -43,3 +43,6 @@ archive/drop_processed/
 # --- batch selector outputs (never commit) ---
 /reports/BATCH_READY.txt
 /reports/_batch_ready/
+
+# --- batch run logs (generated) ---
+/reports/BATCH_RUN_*.log
