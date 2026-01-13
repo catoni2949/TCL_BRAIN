@@ -75,6 +75,7 @@ class LockedSOVWriter:
         self.gov_sheet = self.lock["governing"]["sheet"]
         self.allowed_cols = set(self.lock["write_policy"]["allowed_columns"])
         self.denied_cols = set(self.lock["write_policy"]["denied_columns"])
+        self.protected_addrs = set(self.lock.get("protected_formula_cells") or [])
         span = self.lock["governing"]["code_rows"]["span"]
         self.row_min = int(span["first"])
         self.row_max = int(span["last"])
@@ -134,6 +135,34 @@ class LockedSOVWriter:
                    new_value: Any,
                    source: SourceRef,
                    meta: Optional[Dict[str, Any]] = None):
+        # protected formula cells: never overwrite (keep template formula)
+        if cell_addr in getattr(self, 'protected_addrs', set()):
+            cur = self.ws[cell_addr].value
+            if not (isinstance(cur, str) and cur.strip().startswith('=')):
+                raise PermissionError(f"WRITE BLOCKED: protected formula cell {cell_addr} is not a formula")
+            event = {
+                'event': 'skipped_protected_formula',
+                'plan_hash': self.plan_hash,
+                'ts': now_ts(),
+                'template_path': self.template_path,
+                'template_sha256': self.template_sha,
+                'lock_path': self.lock_path,
+                'sheet': self.gov_sheet,
+                'cell': cell_addr,
+                'formula': cur,
+                'attempted_value': new_value,
+                'source': {
+                    'type': source.source_type,
+                    'path': source.source_path,
+                    'locator': source.locator,
+                    'notes': source.notes,
+                },
+                'meta': meta or {}
+            }
+            with open(self.audit_log_path, 'a', encoding='utf-8') as f:
+                f.write(json.dumps(event) + "\n")
+            return
+
         # hard gate
         old_value = self._assert_write_allowed(self.gov_sheet, cell_addr)
 
