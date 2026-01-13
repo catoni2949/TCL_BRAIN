@@ -1,0 +1,8 @@
+
+# --- runtime / volatile ---
+logs/*.log
+state/*.json
+state/*.bak*
+*.bak
+*.tmp
+tmp/

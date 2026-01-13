@@ -1,7 +1,0 @@
-{
-  "updated_utc": "2026-01-01T23:54:20Z",
-  "delta_links": {
-    "Inbox": "https://graph.microsoft.com/v1.0/users/rcaton@tclpartners.com/mailFolders('Inbox')/messages/delta?$deltatoken=Ria-5ww42ZtOB0Q0dUl5J4aPO2cFesIGnW7qT-RFnqfnQo_YRPNw4HocuQmVENhDESO0eTVbUAX_LQSmbq8mY6oiiuVo_CjJfCWLlgOdO78Cv-cGDrus2qbZagUOge-eCpecrs4ZzdMnsaay9U1wGF96AkUAf2xuRIkiOpYxoBd0c7R6kgEVKdz0U5Z055epTO2SMWUDLi8jzTUwrY2ZreaI1_bk6oGYtgQlBFRe1is.KenUl04rt7kEj4OAbrjDC62gPHM2sAIHYeFQg3LPQwU",
-    "SentItems": "https://graph.microsoft.com/v1.0/users/rcaton@tclpartners.com/mailFolders('SentItems')/messages/delta?$deltatoken=JLQ7x6xEXzzZC9pTM16Y4PwB6C5W9wuHAwNn-y0_P3K3fVljiMMtOLRMrymQIs9s9ArLzCV6-kR_P16a1Lv42iIXjbD83Vdik8r60aWbnTjK4f9oSrxP292AJNytY4HdqmgCcuIWJR7EhzZ8npIyl6kLzR1-N9--GHdKRvK9yRd6PDGFrDk65hiVCP3uTLqM.w_5M9V6m6zaAyUC7zvPXJg7iu7dojbQbMpA_6OY6lSk"
-  }
-}
