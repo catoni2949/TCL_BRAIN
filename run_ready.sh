@@ -1,6 +1,16 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
+die(){ echo "❌ $*" >&2; exit 1; }
+
+# Block *any* dirt, including untracked files
+if git status --porcelain | grep -q .; then
+  echo "DIRTY GIT STATE (including untracked):" >&2
+  git status --porcelain >&2
+  die "abort"
+fi
+
+
 # ---- config defaults (override via env) ----
 : "${REPORTS_DIR:=reports}"
 : "${READY_LIST:=$REPORTS_DIR/BATCH_READY.txt}"
