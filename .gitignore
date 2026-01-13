@@ -17,3 +17,4 @@ archive/drop_processed/
 # --- generated apply outputs (never commit) ---
 /reports/APPLIED_HARDENED_*.xlsm
 /reports/APPLIED_HARDENED_*.audit.jsonl
+/run_apply.sh
