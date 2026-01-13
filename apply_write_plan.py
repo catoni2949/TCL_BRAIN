@@ -89,6 +89,9 @@ def main():
         fatal(f"lock not found: {lock_path}")
 
     plan = json.loads(plan_path.read_text(encoding="utf-8"))
+
+    plan_hash = plan.get("plan_hash") or sha256_json(plan.get("writes", []))
+
     lock = load_lock(str(lock_path))
     lock_sha = lock["template"]["sha256"]
 
@@ -144,6 +147,7 @@ def main():
         template_path=str(template_path),
         lock_path=str(lock_path),
         audit_log_path=str(audit),
+        plan_hash=plan_hash,
     )
 
     for i, w in enumerate(writes):

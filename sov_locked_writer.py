@@ -49,10 +49,11 @@ class SourceRef:
     notes: str = ""               # optional
 
 class LockedSOVWriter:
-    def __init__(self, template_path: str, lock_path: str, audit_log_path: str):
+    def __init__(self, template_path: str, lock_path: str, audit_log_path: str, plan_hash=None):
         self.template_path = os.path.abspath(os.path.expanduser(template_path))
         self.lock_path = os.path.abspath(os.path.expanduser(lock_path))
         self.audit_log_path = os.path.abspath(os.path.expanduser(audit_log_path))
+        self.plan_hash = plan_hash
 
         if not os.path.exists(self.template_path):
             raise FileNotFoundError(f"template not found: {self.template_path}")
@@ -141,6 +142,9 @@ class LockedSOVWriter:
 
         # audit log
         event = {
+            "event": "write",
+            "plan_hash": self.plan_hash,
+
             "ts": now_ts(),
             "template_path": self.template_path,
             "template_sha256": self.template_sha,

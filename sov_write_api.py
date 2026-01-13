@@ -24,8 +24,8 @@ class WriteMeta:
     line_id: str               # stable ID for traceability (e.g., "UR_HVAC_BASE" or UUID)
     note: str = ""
 
-def open_writer(template_path: str, lock_path: str, audit_log_path: str) -> LockedSOVWriter:
-    return LockedSOVWriter(template_path=template_path, lock_path=lock_path, audit_log_path=audit_log_path)
+def open_writer(template_path: str, lock_path: str, audit_log_path: str, plan_hash=None) -> LockedSOVWriter:
+    return LockedSOVWriter(template_path=template_path, lock_path=lock_path, audit_log_path=audit_log_path, plan_hash=plan_hash)
 
 def write_value(writer: LockedSOVWriter,
                 cell_addr: str,
