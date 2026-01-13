@@ -18,3 +18,16 @@ archive/drop_processed/
 /reports/APPLIED_HARDENED_*.xlsm
 /reports/APPLIED_HARDENED_*.audit.jsonl
 /run_apply.sh
+
+# --- generated batch artifacts ---
+/reports/BATCH_APPLY_*.csv
+
+# --- signatures are generated outputs ---
+/reports/signatures/
+
+# --- local helper scripts if you don't want them committed ---
+# (comment these out if you DO want them committed)
+/run_apply_batch.sh
+/sign_outputs.sh
+/dryrun_diff_report.py
+/audit_schema_guard.py
