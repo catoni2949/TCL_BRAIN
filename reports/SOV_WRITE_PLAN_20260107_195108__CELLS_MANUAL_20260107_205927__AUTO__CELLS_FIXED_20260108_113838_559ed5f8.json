@@ -191,7 +191,7 @@
     },
     {
       "cell": "H6",
-      "formula": "=IFERROR(SUM(T:T)/H4,0)",
+      "formula": "='ESTIMATE (output)'!H6",
       "match": {
         "field": "COST_SF"
       },
