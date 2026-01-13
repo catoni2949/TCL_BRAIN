@@ -46,3 +46,7 @@ archive/drop_processed/
 
 # --- batch run logs (generated) ---
 /reports/BATCH_RUN_*.log
+
+# --- hardened outputs (aliases only) ---
+/reports/APPLIED_HARDENED_GOLD.xlsm
+/reports/APPLIED_HARDENED_LATEST.xlsm
