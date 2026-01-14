@@ -1,0 +1,102 @@
+{
+  "lock": "/Users/tclserver/TCL_BRAIN/schema/TCL_SOV_TEMPLATE_GBT.lock.v1.json",
+  "plan_hash": "4853075d198f8be486d245e16005d3a7fbbbcad9f9b511cda69dfa9d3ad958a1",
+  "template": "/Volumes/TCL_DATA 1TB/TCL Partners Dropbox/Ryan Caton/TCL/TCL_SOV_TEMPLATE GBT.xlsm",
+  "template_sha256": "5f4486582595e3a1888b1b3559b0c105ba45b472d18dfb67fb7693f065d84a5b",
+  "writes": [
+    {
+      "cell": "I70",
+      "match": {
+        "trade": "Concrete"
+      },
+      "meta": {
+        "bucket_code": "QUOTE",
+        "line_id": "Concrete:ARH Inc",
+        "option": "BOTH",
+        "project": "C4WLS - St. Francis",
+        "trade": "Concrete"
+      },
+      "sheet": "ESTIMATE (INPUT)",
+      "source": {
+        "locator": "pages:1-2",
+        "source_path": "/Volumes/TCL_DATA 1TB/TCL Partners Dropbox/TCL Partners Dropbox/TCL_Server/_Estimates/C4WLS  St. Francis/Sub Bids/UR.pdf",
+        "source_type": "pdf",
+        "vendor": "ARH Inc"
+      },
+      "write": {
+        "column": "AMOUNT",
+        "value": 3295.0
+      }
+    },
+    {
+      "cell": "I91",
+      "match": {
+        "trade": "Millwork"
+      },
+      "meta": {
+        "bucket_code": "QUOTE",
+        "line_id": "Millwork:W.W. Wells",
+        "option": "BOTH",
+        "project": "C4WLS - St. Francis",
+        "trade": "Millwork"
+      },
+      "sheet": "ESTIMATE (INPUT)",
+      "source": {
+        "locator": "pages:1-2",
+        "source_path": "/Volumes/TCL_DATA 1TB/TCL Partners Dropbox/TCL Partners Dropbox/TCL_Server/_Estimates/C4WLS  St. Francis/Sub Bids/WW Wells.pdf",
+        "source_type": "pdf",
+        "vendor": "W.W. Wells"
+      },
+      "write": {
+        "column": "AMOUNT",
+        "value": 52443.0
+      }
+    },
+    {
+      "cell": "I160",
+      "match": {
+        "trade": "Painting"
+      },
+      "meta": {
+        "bucket_code": "QUOTE",
+        "line_id": "Painting:Pro Paint Solutions",
+        "option": "BOTH",
+        "project": "C4WLS - St. Francis",
+        "trade": "Painting"
+      },
+      "sheet": "ESTIMATE (INPUT)",
+      "source": {
+        "locator": "pages:1-2",
+        "notes": "",
+        "source_path": "/Volumes/TCL_DATA 1TB/TCL Partners Dropbox/TCL Partners Dropbox/TCL_Server/_Estimates/C4WLS  St. Francis/Sub Bids/Pro Paint Solutions.pdf",
+        "source_type": "pdf"
+      },
+      "write": {
+        "value": 5064.0
+      }
+    },
+    {
+      "cell": "I131",
+      "match": {
+        "trade": "Drywall"
+      },
+      "meta": {
+        "bucket_code": "QUOTE",
+        "line_id": "Drywall:Olympic",
+        "option": "UNKNOWN",
+        "project": "C4WLS - St. Francis",
+        "trade": "Drywall"
+      },
+      "sheet": "ESTIMATE (INPUT)",
+      "source": {
+        "locator": "pages:1-2",
+        "notes": "",
+        "source_path": "/Volumes/TCL_DATA 1TB/TCL Partners Dropbox/TCL Partners Dropbox/TCL_Server/_Estimates/C4WLS  St. Francis/Sub Bids/Olympic.pdf",
+        "source_type": "pdf"
+      },
+      "write": {
+        "value": 9971.0
+      }
+    }
+  ]
+}
