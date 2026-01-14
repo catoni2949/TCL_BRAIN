@@ -88,7 +88,11 @@ def main():
     if not lock_path.exists():
         fatal(f"lock not found: {lock_path}")
 
-    plan = json.loads(plan_path.read_text(encoding="utf-8"))
+    
+plan = json.loads(plan_path.read_text(encoding="utf-8"))
+
+# drop legacy template_sha
+plan.pop("template_sha", None)
 
     plan_hash = plan.get("plan_hash") or sha256_json(plan.get("writes", []))
 
