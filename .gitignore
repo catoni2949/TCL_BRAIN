@@ -50,3 +50,4 @@ archive/drop_processed/
 # --- hardened outputs (aliases only) ---
 /reports/APPLIED_HARDENED_GOLD.xlsm
 /reports/APPLIED_HARDENED_LATEST.xlsm
+dropbox.index.sqlite
