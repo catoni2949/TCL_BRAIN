@@ -90,35 +90,34 @@ def main():
 
     
 plan = json.loads(plan_path.read_text(encoding="utf-8"))
-    # drop legacy template_sha
-    plan.pop("template_sha", None)
+# drop legacy template_sha
 
-    plan_hash = plan.get("plan_hash") or sha256_json(plan.get("writes", []))
+plan_hash = plan.get("plan_hash") or sha256_json(plan.get("writes", []))
 
-    lock = load_lock(str(lock_path))
-    lock_sha = lock["template"]["sha256"]
+lock = load_lock(str(lock_path))
+lock_sha = lock["template"]["sha256"]
 
-    # --- template sha must match ---
-    if plan.get("template_sha256") != lock_sha:
-        fatal(f"TEMPLATE SHA mismatch: plan={plan.get('template_sha256')} lock={lock_sha}")
+# --- template sha must match ---
+if plan.get("template_sha256") != lock_sha:
+    fatal(f"TEMPLATE SHA mismatch: plan={plan.get('template_sha256')} lock={lock_sha}")
 
-    writes = plan.get("writes", [])
-    if not isinstance(writes, list) or not writes:
-        fatal("Plan has no writes")
+writes = plan.get("writes", [])
+if not isinstance(writes, list) or not writes:
+    fatal("Plan has no writes")
 
-    # --- HARDENING: plan fingerprint enforcement ---
-    expected = plan.get("plan_hash")
-    actual = sha256_json(writes)
-    if not expected:
-        fatal("plan_hash missing from plan")
-    if expected != actual:
-        fatal(f"PLAN TAMPER DETECTED: expected={expected} actual={actual}")
+# --- HARDENING: plan fingerprint enforcement ---
+expected = plan.get("plan_hash")
+actual = sha256_json(writes)
+if not expected:
+    fatal("plan_hash missing from plan")
+if expected != actual:
+    fatal(f"PLAN TAMPER DETECTED: expected={expected} actual={actual}")
 
-    # --- PREFLIGHT (HARDENED) ---
-    cnt = collections.Counter((w.get("sheet"), w.get("cell")) for w in writes)
-    for (sh, cell), n in cnt.items():
-        if n > 1:
-            fatal(f"DUPLICATE CELL: {sh}!{cell} x{n}")
+# --- PREFLIGHT (HARDENED) ---
+cnt = collections.Counter((w.get("sheet"), w.get("cell")) for w in writes)
+for (sh, cell), n in cnt.items():
+    if n > 1:
+        fatal(f"DUPLICATE CELL: {sh}!{cell} x{n}")
 
     for i, w in enumerate(writes):
         cell = (w.get("cell") or "").strip()
