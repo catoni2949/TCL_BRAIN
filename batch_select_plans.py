@@ -202,8 +202,14 @@ def main() -> int:
         # Ensure plan_hash exists (compute; doesn’t change writes)
         if not plan.get("plan_hash"):
             plan["plan_hash"] = sha256_json(writes)
+
+            # ALSO sync template sha to current lock (prevents TEMPLATE SHA mismatch loops)
+            plan["template_sha256"] = lock["template"]["sha256"]
+            plan.pop("template_sha", None)  # drop legacy if present
+
             outp = ready_dir / p.name
-            outp.write_text(json.dumps(plan, indent=2, sort_keys=True), encoding="utf-8")
+            outp.write_text(json.dumps(plan, indent=2, sort_keys=True) + "\n", encoding="utf-8")
+
             ready.append(str(outp))
             skipped["fixed_plan_hash"] += 1
         else:
